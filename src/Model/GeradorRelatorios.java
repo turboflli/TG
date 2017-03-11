@@ -31,24 +31,24 @@ import javax.swing.JOptionPane;
  */
 public class GeradorRelatorios extends Thread{
     private String mes="";
-    private String professor="";
+    private boolean professor;
     public void setMes(int mes){
         this.mes=Integer.toString(mes);
         if(this.mes.length()<2){
             this.mes="0"+this.mes;
         }
     }
-    public void setProfessor(String professor) {
+    public void setProfessor(boolean professor) {
         this.professor = professor;
     }
     private Connection con=new Conexao().conectar();
     public void run(){
         
-        if(!this.mes.equals("")){
-            GerarMes();
-        }else if(!this.professor.equals("")){
-
+        if(this.professor){
             GerarProfessor();
+        }else {
+            GerarMes();
+            
         }
         
     }
@@ -125,56 +125,68 @@ public class GeradorRelatorios extends Thread{
     
     public void GerarProfessor(){
        Statement stm;
-       int id=Integer.parseInt(this.professor.split("¬")[0]);
-       String name=this.professor.split("¬")[1];
+       int id=0;
+       String name="";
         try {
             
             
             Document documento=new Document();
             
             
-            FileOutputStream ot=new FileOutputStream("Emprestimos_Com_"+name+".pdf", true);
+            FileOutputStream ot=new FileOutputStream("Emprestimos_Com_professor.pdf", true);
             PdfWriter.getInstance(documento, ot);
-            
+            PdfPTable table;
             documento.open();
-            Paragraph pa=new Paragraph();
-          Font fonte =new Font(Font.FontFamily.TIMES_ROMAN , 28, Font.BOLD,new BaseColor(0,0,0));
-         pa.setFont(fonte);
-          pa.setAlignment(Element.ALIGN_CENTER);
-          pa.setSpacingAfter(50);
-        pa.add(name);
-        documento.add(pa);
-            PdfPTable table = new PdfPTable(2);
+            
+            Statement el=con.createStatement();
+            ResultSet els=el.executeQuery("select id,nome from professor");
+            
+            while(els.next()){
+                
+                id=els.getInt("id");
+                name=els.getString("nome");
+                Paragraph pa=new Paragraph();
+                Font fonte =new Font(Font.FontFamily.TIMES_ROMAN , 28, Font.BOLD,new BaseColor(0,0,0));
+                pa.setFont(fonte);
+                pa.setAlignment(Element.ALIGN_CENTER);
+                pa.setSpacingAfter(50);
+                pa.add(name);
+                documento.add(pa);
+                table = new PdfPTable(2);
+                table.setSpacingAfter(20);
 
-            PdfPCell cell2 = new PdfPCell(new Paragraph("livro"));
-            PdfPCell cell3 = new PdfPCell(new Paragraph("Data"));
+                PdfPCell cell2 = new PdfPCell(new Paragraph("livro"));
+                PdfPCell cell3 = new PdfPCell(new Paragraph("Data"));
             
 
-            table.addCell(cell2);
-            table.addCell(cell3);
+                table.addCell(cell2);
+                table.addCell(cell3);
 
             
             
-            stm = con.createStatement();
-            ResultSet rs=stm.executeQuery("select l.titulo as titulo,e.dataRealizacao as dr from livro l inner join livrosprofessor e on e.idlivro=l.id  and e.idprofessor="+id);
+                stm = con.createStatement();
+                ResultSet rs=stm.executeQuery("select l.titulo as titulo,e.dataRealizacao as dr from livro l inner join livrosprofessor e on e.idlivro=l.id  and e.dataRealizacao like '__"+this.mes+"____' and e.idprofessor="+id);
             
-            String data="";
+                String data="";
             
-        while(rs.next()){
+                while(rs.next()){
 
-            cell2 = new PdfPCell(new Paragraph(rs.getString("titulo")));
+                    cell2 = new PdfPCell(new Paragraph(rs.getString("titulo")));
+
+                    data=rs.getString("dr");
+                    data=data.substring(0, 2)+"/"+data.substring(2,4)+"/"+data.substring(4);
+                   cell3 = new PdfPCell(new Paragraph(data));
+
+                    table.addCell(cell2);
+                    table.addCell(cell3);
+
+                }
+                documento.add(table);
+            }
             
-            data=rs.getString("dr");
-            data=data.substring(0, 2)+"/"+data.substring(2,4)+"/"+data.substring(4);
-           cell3 = new PdfPCell(new Paragraph(data));
-
-            table.addCell(cell2);
-            table.addCell(cell3);
-
-        }
-        documento.add(table);
+            
         documento.close();
-        JOptionPane.showMessageDialog(null,"PDF pronto referente ao(à) professor(a) "+name,"termino",JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null,"PDF pronto referente aos professores do mês "+this.mes,"termino",JOptionPane.INFORMATION_MESSAGE);
         
         
         } catch (SQLException ex) {

@@ -49,7 +49,6 @@ public class ControleEmprestimoProfessor extends javax.swing.JFrame {
         Lista1 = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         TextProfessor = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -80,14 +79,6 @@ public class ControleEmprestimoProfessor extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton2.setText("PDF");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
         TextProfessor.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         TextProfessor.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -109,12 +100,10 @@ public class ControleEmprestimoProfessor extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(TextLivro1)
-                            .addComponent(Lista1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(Lista1, 0, 317, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton3)
-                        .addGap(190, 190, 190)
-                        .addComponent(jButton2)
-                        .addGap(0, 64, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -137,9 +126,7 @@ public class ControleEmprestimoProfessor extends javax.swing.JFrame {
                     .addComponent(jButton1)
                     .addComponent(Lista1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton2))
+                .addComponent(jButton3)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -173,13 +160,6 @@ public class ControleEmprestimoProfessor extends javax.swing.JFrame {
         
 
     }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        GeradorRelatorios gr=new GeradorRelatorios();
-        String h=Integer.toString(lpm.descobrirProfessor(TextProfessor.getText()));
-        gr.setProfessor(h+"¬"+TextProfessor.getText());
-        gr.start();
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void TextProfessorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TextProfessorKeyPressed
         if (evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -233,7 +213,6 @@ public class ControleEmprestimoProfessor extends javax.swing.JFrame {
     private javax.swing.JTextField TextLivro1;
     private javax.swing.JTextField TextProfessor;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;

@@ -22,8 +22,17 @@ public class LivroProfessorManenger {
     public void cadastrar(LivroProfessor lp){
         try {
             Statement stm=con.createStatement();
-            stm.execute("insert into livrosprofessor(idprofessor,idlivro,dataRealizacao) values ("+lp.getProf()+","+lp.getLiv()+",'"+lp.getData()+"')");
-            JOptionPane.showMessageDialog(null, "Cadastrado com sucesso","Sucesso",JOptionPane.PLAIN_MESSAGE);
+            ResultSet rs=stm.executeQuery("select quantidade from livro where id="+lp.getLiv());
+            rs.next();
+            int q=rs.getInt("quantidade");
+            if(q==0){
+                JOptionPane.showMessageDialog(null, "Livro  indisponível\ntodos os exemplares já estão emprestados","Sem",JOptionPane.ERROR_MESSAGE);
+            }else{
+                stm.execute("insert into livrosprofessor(idprofessor,idlivro,dataRealizacao) values ("+lp.getProf()+","+lp.getLiv()+",'"+lp.getData()+"')");
+                q--;
+                stm.execute("update livro set quantidade="+q+" where id="+lp.getLiv());
+                JOptionPane.showMessageDialog(null, "Cadastrado com sucesso","Sucesso",JOptionPane.PLAIN_MESSAGE);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(LivroProfessorManenger.class.getName()).log(Level.SEVERE, null, ex);
         }

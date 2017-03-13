@@ -5,17 +5,45 @@
  */
 package view;
 
+import Model.EmprestimoManenger;
+import Model.Emprestimos;
+import java.awt.event.KeyEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Lucas
  */
 public class ControleDevolucao extends javax.swing.JFrame {
-
+    private ArrayList<Emprestimos> listaEmprestimos;
+    private Emprestimos e;
+    private GregorianCalendar calen;
+    private SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); 
     /**
      * Creates new form ControleDevolucao
      */
     public ControleDevolucao() {
         initComponents();
+        e=new Emprestimos();
+        calen=new GregorianCalendar();
+        ButLivro1.setVisible(false);
+        ButLivro2.setVisible(false);
+        lLivro1.setVisible(false);
+        lLivro2.setVisible(false);
+        lRealizacao.setVisible(false);
+        lDevolucao.setVisible(false);
+        jLabel1.setVisible(false);
+        jLabel2.setVisible(false);
+        TextMulta.setVisible(false);
+        ButPagar.setVisible(false);
     }
 
     /**
@@ -27,169 +55,268 @@ public class ControleDevolucao extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        TextAluno = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        TextNome = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox();
-        jLabel3 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
-        jButton1 = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
-        jFormattedTextField2 = new javax.swing.JFormattedTextField();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        lLivro1 = new javax.swing.JLabel();
+        lLivro2 = new javax.swing.JLabel();
+        ButLivro1 = new javax.swing.JButton();
+        ButLivro2 = new javax.swing.JButton();
+        lRealizacao = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        lDevolucao = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        ButPagar = new javax.swing.JButton();
+        TextMulta = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setText("Nome:");
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel7.setText("Nome:");
 
-        TextAluno.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel2.setText("Livro1:");
+        TextNome.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        TextNome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TextNomeKeyPressed(evt);
+            }
+        });
 
         jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox1ItemStateChanged(evt);
+            }
+        });
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel3.setText("Livro2:");
+        lLivro1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lLivro1.setText("jLabel1");
 
-        jComboBox2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        lLivro2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lLivro2.setText("jLabel2");
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel4.setText("Data de");
+        ButLivro1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        ButLivro1.setText("Devolver");
+        ButLivro1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButLivro1ActionPerformed(evt);
+            }
+        });
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel5.setText("Realização");
+        ButLivro2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        ButLivro2.setText("Devolver");
+        ButLivro2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButLivro2ActionPerformed(evt);
+            }
+        });
+
+        lRealizacao.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lRealizacao.setText("00/00/0000");
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel1.setText("-");
+
+        lDevolucao.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lDevolucao.setText("00/00/0000");
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel2.setText("Multa:");
+
+        ButPagar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        ButPagar.setText("Pagar");
+        ButPagar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButPagarActionPerformed(evt);
+            }
+        });
 
         try {
-            jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+            TextMulta.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton1.setText("Devolver1");
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel6.setText("Multa:");
-
-        try {
-            jFormattedTextField2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        jFormattedTextField2.setText("00");
-        jFormattedTextField2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton2.setText("Devolver2");
-
-        jButton3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton3.setText("Devolver Todos");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(TextAluno))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5))
-                                .addGap(18, 18, 18)
-                                .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton1)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel6)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(36, 36, 36)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton3)
-                                    .addComponent(jButton2))))
-                        .addGap(0, 78, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(TextAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel5))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
-                        .addComponent(jButton3)
-                        .addGap(18, 18, 18)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addContainerGap())
-        );
+        TextMulta.setText("00");
+        TextMulta.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(TextNome, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(ButLivro2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(ButLivro1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lLivro2)
+                                    .addComponent(lLivro1)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(TextMulta, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(ButPagar))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lRealizacao)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(lDevolucao)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(TextNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lLivro1)
+                            .addComponent(ButLivro1))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ButLivro2)
+                            .addComponent(lLivro2))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lRealizacao)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lDevolucao))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(ButPagar)
+                        .addComponent(TextMulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void TextNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TextNomeKeyPressed
+        if (evt.getKeyCode()==KeyEvent.VK_ENTER){
+            String h=e.descobrirAluno(TextNome.getText());
+            if(h.length()>0){
+                TextNome.setText(h);
+                listaEmprestimos=EmprestimoManenger.returnaTodos(TextNome.getText());
+                jComboBox1.removeAllItems();
+                for(int u=0;u<listaEmprestimos.size();u++){
+                 jComboBox1.addItem(listaEmprestimos.get(u).getId());
+                }
+                
+                
+            }else{
+                JOptionPane.showMessageDialog(null, "Nenhum aluno encontrado","Vazio",JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_TextNomeKeyPressed
+
+    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+        if(jComboBox1.getItemCount()>0){
+            
+            Emprestimos escolhido=listaEmprestimos.get(jComboBox1.getSelectedIndex());
+            if(escolhido.getPendentes()==3 ){
+                lLivro1.setText(EmprestimoManenger.getLivro(escolhido.getLivro1()));
+                lLivro2.setText(EmprestimoManenger.getLivro(escolhido.getLivro2()));
+                lLivro1.setVisible(true);
+                lLivro2.setVisible(true);
+                ButLivro1.setVisible(true);
+                ButLivro2.setVisible(true);
+            }else if(escolhido.getPendentes()==1){
+                lLivro1.setText(EmprestimoManenger.getLivro(escolhido.getLivro1()));
+                lLivro1.setVisible(true);
+                ButLivro1.setVisible(true);
+                lLivro2.setVisible(false);
+                ButLivro2.setVisible(false);
+            }else if(escolhido.getPendentes()==2){
+                lLivro2.setText(EmprestimoManenger.getLivro(escolhido.getLivro2()));
+                lLivro2.setVisible(true);
+                ButLivro2.setVisible(true);
+                lLivro1.setVisible(false);
+                ButLivro1.setVisible(false);
+            }else{
+                ButLivro1.setVisible(false);
+                ButLivro2.setVisible(false);
+                lLivro1.setVisible(false);
+                lLivro2.setVisible(false);
+            }
+            String data=escolhido.getDatarealizacao();
+            data=data.substring(0, 2)+"/"+data.substring(2, 4)+"/"+data.substring(4);
+            lRealizacao.setText(data);
+            data=escolhido.getDataDevolucao();
+            data=data.substring(0, 2)+"/"+data.substring(2, 4)+"/"+data.substring(4);
+            lDevolucao.setText(data);
+            lRealizacao.setVisible(true);
+            lDevolucao.setVisible(true);
+            jLabel1.setVisible(true);
+            Date tempo;
+            Date hoje;
+            try {
+                
+                tempo = formato.parse(data);
+                calen=new GregorianCalendar();
+                hoje=calen.getTime();
+                data=formato.format(hoje);
+                hoje=formato.parse(data);
+                if(hoje.after(tempo)){
+                    multar();
+                    escolhido.setMulta(Integer.parseInt(TextMulta.getText()));
+                    EmprestimoManenger.multar(escolhido);
+            }else{
+                    jLabel2.setVisible(false);
+                TextMulta.setVisible(false);
+                ButPagar.setVisible(false);
+                }
+            } catch (ParseException ex) {
+                Logger.getLogger(ControleDevolucao.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }
+    }//GEN-LAST:event_jComboBox1ItemStateChanged
+
+    private void ButLivro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButLivro1ActionPerformed
+        Emprestimos escolhido=listaEmprestimos.get(jComboBox1.getSelectedIndex());
+        EmprestimoManenger.devolver1(escolhido);
+        ButLivro1.setVisible(false);
+        lLivro1.setVisible(false);
+    }//GEN-LAST:event_ButLivro1ActionPerformed
+
+    private void ButLivro2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButLivro2ActionPerformed
+        Emprestimos escolhido=listaEmprestimos.get(jComboBox1.getSelectedIndex());
+        EmprestimoManenger.devolver2(escolhido);
+        ButLivro2.setVisible(false);
+        lLivro2.setVisible(false);
+    }//GEN-LAST:event_ButLivro2ActionPerformed
+
+    private void ButPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButPagarActionPerformed
+        Emprestimos escolhido=listaEmprestimos.get(jComboBox1.getSelectedIndex());
+        escolhido.setMulta(Integer.parseInt(TextMulta.getText()));
+        calen= new GregorianCalendar();
+        escolhido.setDataPagamento(formato.format(calen.getTime()).replace("/", ""));
+        EmprestimoManenger.pagar(escolhido);
+        jLabel2.setVisible(false);
+        TextMulta.setVisible(false);
+        ButPagar.setVisible(false);
+    }//GEN-LAST:event_ButPagarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -226,21 +353,54 @@ public class ControleDevolucao extends javax.swing.JFrame {
         });
     }
 
+    
+    
+    private void multar(){
+        jLabel2.setVisible(true);
+        TextMulta.setVisible(true);
+        ButPagar.setVisible(true);
+        int days=0;
+        Date tempo;
+            Date hoje;
+            try {
+                tempo = formato.parse(lDevolucao.getText());
+                hoje=calen.getTime();
+                String temp=formato.format(hoje);
+                hoje=formato.parse(temp);
+                while(hoje.compareTo(tempo)==1){
+                    calen.setTime(tempo);
+                    calen.add(Calendar.DAY_OF_YEAR, 1);
+                    tempo=calen.getTime();
+                    if(tempo.getDay()!=0 && tempo.getDay()!=6){days++;}//exclui sabados e domingos
+                }
+                
+                if(days>9){
+                    TextMulta.setText(Integer.toString(days));
+                }else{
+                    TextMulta.setText("0"+Integer.toString(days));
+                }
+            } catch (ParseException ex) {
+                Logger.getLogger(ControleDevolucao.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+    }
+    
+    
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField TextAluno;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton ButLivro1;
+    private javax.swing.JButton ButLivro2;
+    private javax.swing.JButton ButPagar;
+    private javax.swing.JFormattedTextField TextMulta;
+    private javax.swing.JTextField TextNome;
     private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
-    private javax.swing.JFormattedTextField jFormattedTextField2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel lDevolucao;
+    private javax.swing.JLabel lLivro1;
+    private javax.swing.JLabel lLivro2;
+    private javax.swing.JLabel lRealizacao;
     // End of variables declaration//GEN-END:variables
 }

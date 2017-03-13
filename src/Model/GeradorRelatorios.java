@@ -89,7 +89,7 @@ public class GeradorRelatorios extends Thread{
             
             
             stm = con.createStatement();
-            ResultSet rs=stm.executeQuery("select a.nome, c.liv1,c.liv2,c.dr,c.dd from aluno a right join (select c.ida as idaluno,c.til1 as liv1, l.titulo as liv2,c.rea as dr,c.dev as dd from livro l right join (select e.aluno as ida,l.titulo as til1 ,e.livro2 as id2,e.dataRealizacao as rea,e.dataDevolucao as dev from livro l inner join emprestimo e where e.livro1=l.id and e.dataRealizacao like '__"+this.mes+"____') as c on l.id=id2)as c on c.idaluno=a.id");
+            ResultSet rs=stm.executeQuery("select a.nome, c.liv1,c.liv2,c.dr,c.dd from aluno a right join (select c.ida as idaluno,c.til1 as liv1, l.titulo as liv2,c.rea as dr,c.dev as dd from livro l right join (select e.aluno as ida,l.titulo as til1 ,e.livro2 as id2,e.dataRealizacao as rea,e.dataDevolucao as dev from livro l inner join emprestimo e where e.pendentes>0 and e.livro1=l.id and e.dataRealizacao like '__"+this.mes+"____') as c on l.id=id2)as c on c.idaluno=a.id");
             
             String data="";
             
@@ -123,7 +123,7 @@ public class GeradorRelatorios extends Thread{
         }
     }
     
-    public void GerarProfessor(){
+    private void GerarProfessor(){
        Statement stm;
        int id=0;
        String name="";
@@ -197,4 +197,6 @@ public class GeradorRelatorios extends Thread{
             Logger.getLogger(GeradorRelatorios.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+
 }

@@ -20,8 +20,8 @@ import javax.swing.JOptionPane;
 public class ControleEmprestimos extends javax.swing.JFrame {
 
     private Emprestimos e;
-    GregorianCalendar calen;
-    SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); 
+    private GregorianCalendar calen;
+    private SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); 
 
     /**
      * Creates new form ControleEmprestimos

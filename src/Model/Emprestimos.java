@@ -36,9 +36,8 @@ import javax.swing.JOptionPane;
  */
 public class Emprestimos {
     private Connection con=new Conexao().conectar();
-    private int id,aluno,livro1,livro2,pendente;
-    private String datarealizacao;
-    private String dataDevolucao;
+    private int id,aluno,livro1,livro2,pendentes,multa;
+    private String datarealizacao,dataDevolucao,dataPagamento;
 
     
 
@@ -87,15 +86,15 @@ public class Emprestimos {
     /**
      * @return the pendente
      */
-    public int getPendente() {
-        return pendente;
+    public int getPendentes() {
+        return pendentes;
     }
 
     /**
      * @param pendente the pendente to set
      */
-    public void setPendente(int pendente) {
-        this.pendente = pendente;
+    public void setPendentes(int pendentes) {
+        this.pendentes = pendentes;
     }
 
     /**
@@ -146,8 +145,8 @@ public class Emprestimos {
                                 + "values("+this.aluno+","+this.livro1+","+this.livro2+","+p+",'"+this.datarealizacao+"','"+this.dataDevolucao+"')");
                         JOptionPane.showMessageDialog(null, "Cadastrado com sucesso","Sucesso",JOptionPane.PLAIN_MESSAGE);
                         q1-=1;q2-=1;
-                       // stm.execute("update livro set quantidade="+q1+" where id="+livro1);
-                       // stm.execute("update livro set quantidade="+q2+" where id="+livro2);
+                        stm.execute("update livro set quantidade="+q1+" where id="+livro1);
+                        stm.execute("update livro set quantidade="+q2+" where id="+livro2);
                     }
                 }
             } catch (SQLException ex) {
@@ -166,7 +165,7 @@ public class Emprestimos {
                                 + "values("+this.aluno+","+this.livro1+","+p+",'"+this.datarealizacao+"','"+this.dataDevolucao+"')");
                         JOptionPane.showMessageDialog(null, "Cadastrado com sucesso","Sucesso",JOptionPane.PLAIN_MESSAGE);
                         q-=1;
-                        //stm.execute("update livro set quantidade="+q+" where id="+livro1);
+                        stm.execute("update livro set quantidade="+q+" where id="+livro1);
                     }
             } catch (SQLException ex) {
                 Logger.getLogger(Emprestimos.class.getName()).log(Level.SEVERE, null, ex);
@@ -239,6 +238,48 @@ public class Emprestimos {
         }
         
         return titulos;
+    }
+
+    /**
+     * @return the multa
+     */
+    public int getMulta() {
+        return multa;
+    }
+
+    /**
+     * @param multa the multa to set
+     */
+    public void setMulta(int multa) {
+        this.multa = multa;
+    }
+
+    /**
+     * @return the dataPagamento
+     */
+    public String getDataPagamento() {
+        return dataPagamento;
+    }
+
+    /**
+     * @param dataPagamento the dataPagamento to set
+     */
+    public void setDataPagamento(String dataPagamento) {
+        this.dataPagamento = dataPagamento;
+    }
+
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
     }
      
      

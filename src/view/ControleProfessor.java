@@ -45,12 +45,16 @@ public class ControleProfessor extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(253, 253, 253));
+        jPanel1.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 56, 61), 14), javax.swing.BorderFactory.createLineBorder(new java.awt.Color(211, 217, 217), 8)));
+
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Nome:");
 
         TextNome.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         ButCadastro.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        ButCadastro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Chest.gif"))); // NOI18N
         ButCadastro.setText("Cadastrar");
         ButCadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -59,6 +63,7 @@ public class ControleProfessor extends javax.swing.JFrame {
         });
 
         ButPesquisar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        ButPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/lupa.png"))); // NOI18N
         ButPesquisar.setText("Pesquisar");
         ButPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -67,6 +72,7 @@ public class ControleProfessor extends javax.swing.JFrame {
         });
 
         ButAlterar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        ButAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pena.png"))); // NOI18N
         ButAlterar.setText("Alterar");
         ButAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -75,6 +81,7 @@ public class ControleProfessor extends javax.swing.JFrame {
         });
 
         ButExcluir.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        ButExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/fire.png"))); // NOI18N
         ButExcluir.setText("Excluir");
         ButExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,13 +104,13 @@ public class ControleProfessor extends javax.swing.JFrame {
                                 .addComponent(TextNome))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(ButPesquisar)
-                                .addGap(144, 144, 144)
+                                .addGap(54, 54, 54)
                                 .addComponent(ButExcluir)
-                                .addGap(0, 46, Short.MAX_VALUE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(ButCadastro)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                         .addComponent(ButAlterar)
                         .addGap(56, 56, 56))))
         );
@@ -118,10 +125,10 @@ public class ControleProfessor extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ButCadastro)
                     .addComponent(ButAlterar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ButPesquisar)
-                    .addComponent(ButExcluir))
+                    .addComponent(ButPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ButExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 

@@ -57,13 +57,18 @@ public class ControleLivro extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
+        jPanel1.setBackground(new java.awt.Color(253, 253, 253));
+        jPanel1.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(45, 46, 51), 14), javax.swing.BorderFactory.createLineBorder(new java.awt.Color(211, 217, 217), 8)));
+
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Titulo:");
 
         TextTitulo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         ButListaTitulo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        ButListaTitulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/lista.png"))); // NOI18N
         ButListaTitulo.setText("Listar");
+        ButListaTitulo.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         ButListaTitulo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ButListaTituloActionPerformed(evt);
@@ -76,7 +81,9 @@ public class ControleLivro extends javax.swing.JFrame {
         TextAutor.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         ButListaAutor.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        ButListaAutor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/lista.png"))); // NOI18N
         ButListaAutor.setText("Listar");
+        ButListaAutor.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         ButListaAutor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ButListaAutorActionPerformed(evt);
@@ -86,7 +93,9 @@ public class ControleLivro extends javax.swing.JFrame {
         Lista.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         ButPesquisa.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        ButPesquisa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/lupa.png"))); // NOI18N
         ButPesquisa.setText("Pesquisar");
+        ButPesquisa.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         ButPesquisa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ButPesquisaActionPerformed(evt);
@@ -124,6 +133,7 @@ public class ControleLivro extends javax.swing.JFrame {
         TextQuantidade.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         ButGravar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        ButGravar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Chest.gif"))); // NOI18N
         ButGravar.setText("Gravar");
         ButGravar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -132,6 +142,7 @@ public class ControleLivro extends javax.swing.JFrame {
         });
 
         ButAlterar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        ButAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pena.png"))); // NOI18N
         ButAlterar.setText("Alterar");
         ButAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,6 +151,7 @@ public class ControleLivro extends javax.swing.JFrame {
         });
 
         ButExcluir.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        ButExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/fire.png"))); // NOI18N
         ButExcluir.setText("Excluir");
         ButExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -158,8 +170,8 @@ public class ControleLivro extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                                .addComponent(TextTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addComponent(TextTitulo))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
@@ -188,16 +200,17 @@ public class ControleLivro extends javax.swing.JFrame {
                                             .addComponent(ButGravar)
                                             .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addComponent(ButAlterar)
-                                                .addGap(18, 18, 18)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(ButExcluir)))
-                                        .addGap(0, 0, Short.MAX_VALUE)))))
+                                        .addGap(0, 12, Short.MAX_VALUE)))))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(ButListaTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(ButListaAutor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(ButPesquisa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(ButListaAutor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(ButPesquisa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(ButListaTitulo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel6))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -232,7 +245,7 @@ public class ControleLivro extends javax.swing.JFrame {
                     .addComponent(ButAlterar)
                     .addComponent(ButExcluir)
                     .addComponent(TextQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

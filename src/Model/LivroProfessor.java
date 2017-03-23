@@ -12,6 +12,7 @@ package Model;
 public class LivroProfessor {
     private int prof,liv;
     private String data;
+    private boolean devlvido=false;
 
     /**
      * @return the prof
@@ -53,6 +54,20 @@ public class LivroProfessor {
      */
     public void setData(String data) {
         this.data = data;
+    }
+
+    /**
+     * @return the devlvido
+     */
+    public boolean isDevlvido() {
+        return devlvido;
+    }
+
+    /**
+     * @param devlvido the devlvido to set
+     */
+    public void setDevlvido(boolean devlvido) {
+        this.devlvido = devlvido;
     }
     
 }

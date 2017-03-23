@@ -9,7 +9,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -31,7 +33,7 @@ public class EmprestimoManenger {
                 id=rs.getInt("id");
             }
             
-            rs=stm.executeQuery("select * from emprestimo where (pendentes>0 or multa>0) and aluno="+id);
+            rs=stm.executeQuery("select * from emprestimo where (pendentes>0 or multa>0) and dataPagamento='' and aluno="+id);
             while(rs.next()){
                 Emprestimos e=new Emprestimos();
                 e.setId(rs.getInt("id"));
@@ -41,7 +43,7 @@ public class EmprestimoManenger {
                 e.setPendentes(rs.getInt("pendentes"));
                 e.setDataDevolucao(rs.getString("dataDevolucao"));
                 e.setDatarealizacao(rs.getString("dataRealizacao"));
-                
+                e.setMulta(rs.getInt("multa"));
                     todos.add(e);
                 
                 
@@ -74,6 +76,7 @@ public class EmprestimoManenger {
     
     public static void devolver1(Emprestimos e){
         Statement stm;
+        
         try {
             stm = con.createStatement();
             stm.execute("update emprestimo set pendentes="+(e.getPendentes()-1)+" where id="+e.getId());
@@ -111,14 +114,50 @@ public class EmprestimoManenger {
             Logger.getLogger(EmprestimoManenger.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public static void pagar(Emprestimos e){
+    public static boolean pagar(Emprestimos e){
+        if(e.getPendentes()==0){
+            Statement stm;
+            try {
+            stm = con.createStatement();
+            stm.execute("update emprestimo set multa="+e.getMulta()+", dataPagamento='"+e.getDataPagamento()+"' where id="+e.getId());
+                JOptionPane.showMessageDialog(null, "Pago com sucesso","Pagamento",JOptionPane.PLAIN_MESSAGE);
+                return true;
+            } catch (SQLException ex) {
+                Logger.getLogger(EmprestimoManenger.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Primeiro devolva o livro","Devolva",JOptionPane.ERROR_MESSAGE);
+        }
+        
+        return false;
+    }
+    
+    public static int contar(){
+        int c=0;
         Statement stm;
+        GregorianCalendar calen=new GregorianCalendar();
+        SimpleDateFormat formato = new SimpleDateFormat("ddMMyyyy"); 
         try {
-        stm = con.createStatement();
-        stm.execute("update emprestimo set dataPagamento='"+e.getDataPagamento()+"' where id="+e.getId());
-            JOptionPane.showMessageDialog(null, "Pago com sucesso","Pagamento",JOptionPane.PLAIN_MESSAGE);
+            stm = con.createStatement();
+            ResultSet rs=stm.executeQuery("select count(*) as contador from emprestimo where pendentes>0 and dataDevolucao='"+formato.format(calen.getTime())+"'");
+            rs.next();
+            c=rs.getInt("contador");
         } catch (SQLException ex) {
             Logger.getLogger(EmprestimoManenger.class.getName()).log(Level.SEVERE, null, ex);
         }
+            
+        return c;
+    }
+    
+    public static void adiar(Emprestimos e){
+            Statement stm;
+            try {
+            stm = con.createStatement();
+            stm.execute("update emprestimo set dataDevolucao='"+e.getDataDevolucao()+"' where id="+e.getId());
+                JOptionPane.showMessageDialog(null, "Adiado com sucesso","adiado",JOptionPane.PLAIN_MESSAGE);
+            } catch (SQLException ex) {
+                Logger.getLogger(EmprestimoManenger.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
     }
 }

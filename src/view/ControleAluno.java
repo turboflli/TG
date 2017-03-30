@@ -71,6 +71,12 @@ public class ControleAluno extends javax.swing.JFrame {
         TextTelefone = new javax.swing.JFormattedTextField();
         jButton1 = new javax.swing.JButton();
         ButPesquisarR = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        TextCurso = new javax.swing.JTextField();
+        TextSemestre = new javax.swing.JFormattedTextField();
+        ComboPeriodo = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -143,7 +149,7 @@ public class ControleAluno extends javax.swing.JFrame {
         });
 
         try {
-            TextRal.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###.###")));
+            TextRal.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###.#####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -175,47 +181,72 @@ public class ControleAluno extends javax.swing.JFrame {
             }
         });
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel6.setText("Curso:");
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel7.setText("Semestre:");
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel8.setText("Periodo:");
+
+        TextCurso.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        try {
+            TextSemestre.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        TextSemestre.setText("00");
+        TextSemestre.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        ComboPeriodo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        ComboPeriodo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Manha", "Tarde", "Noite" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel2)))
-                        .addGap(79, 79, 79))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(ButGravar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(ButExcluir)
-                        .addGap(18, 18, 18)
-                        .addComponent(ButAlterar)
-                        .addGap(43, 43, 43)
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(TextEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TextTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(TextNome, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(TextRG, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(TextRal, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(ButPesquisarR)
-                                    .addComponent(ButPesquisarN))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap()
+                .addComponent(ButGravar, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(ButExcluir)
+                .addGap(18, 18, 18)
+                .addComponent(ButAlterar)
+                .addGap(43, 43, 43)
+                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel3)
+                        .addComponent(jLabel2))
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel8))
+                .addGap(75, 75, 75)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ComboPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TextTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(TextNome, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TextRG, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TextRal, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ButPesquisarR)
+                            .addComponent(ButPesquisarN)))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(TextCurso, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(TextEmail, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE))
+                    .addComponent(TextSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -248,11 +279,23 @@ public class ControleAluno extends javax.swing.JFrame {
                     .addComponent(TextTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(TextCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(TextSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(ComboPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ButGravar)
                     .addComponent(ButExcluir)
                     .addComponent(ButAlterar)
                     .addComponent(jButton1))
-                .addContainerGap())
+                .addGap(24, 24, 24))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -272,10 +315,18 @@ public class ControleAluno extends javax.swing.JFrame {
     private void ButPesquisarNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButPesquisarNActionPerformed
         
         if(a.consultarPorNome(TextNome.getText())) {
+            TextNome.setText(a.getNome());
             TextRG.setText(a.getRg());
             TextRal.setText(a.getRa());
             TextEmail.setText(a.getEmail());
             TextTelefone.setText(a.getTelefone());
+            TextCurso.setText(a.getCurso());
+            if(a.getSemestre()>9){
+                TextSemestre.setText(Integer.toString(a.getSemestre()));
+            }else{
+                TextSemestre.setText("0"+Integer.toString(a.getSemestre()));
+            }
+            ComboPeriodo.setSelectedIndex(a.getPeriodo()-1);
             ButExcluir.setVisible(true);
             ButAlterar.setVisible(true);
         }else{
@@ -320,6 +371,9 @@ public class ControleAluno extends javax.swing.JFrame {
        a.setRa(TextRal.getText().replace(".", ""));
        a.setEmail(TextEmail.getText());
        a.setTelefone(TextTelefone.getText().replace("-", "").replace("(", "").replace(")",""));
+       a.setCurso(TextCurso.getText());
+       a.setSemestre(Integer.parseInt(TextSemestre.getText()));
+       a.setPeriodo(ComboPeriodo.getSelectedIndex()+1);
        a.cadastrar();
     }//GEN-LAST:event_ButGravarActionPerformed
 
@@ -330,6 +384,13 @@ public class ControleAluno extends javax.swing.JFrame {
             TextNome.setText((a.getNome()));
             TextEmail.setText(a.getEmail());
             TextTelefone.setText(a.getTelefone());
+            TextCurso.setText(a.getCurso());
+            if(a.getSemestre()>9){
+                TextSemestre.setText(Integer.toString(a.getSemestre()));
+            }else{
+                TextSemestre.setText("0"+Integer.toString(a.getSemestre()));
+            }
+            ComboPeriodo.setSelectedIndex(a.getPeriodo()-1);
             ButExcluir.setVisible(true);
             ButAlterar.setVisible(true);
         }else{
@@ -350,6 +411,8 @@ public class ControleAluno extends javax.swing.JFrame {
                 TextRal.setText("");
                 TextEmail.setText("@fatec.sp.gov.br");
                 TextTelefone.setText("");
+                TextCurso.setText("");
+                TextSemestre.setText("00");
                 ButAlterar.setVisible(false);
                 ButExcluir.setVisible(false);
             }
@@ -367,6 +430,9 @@ public class ControleAluno extends javax.swing.JFrame {
                 a.setRa(TextRal.getText().replace(".", ""));
                 a.setEmail(TextEmail.getText());
                 a.setTelefone(TextTelefone.getText().replace("-", "").replace("(", "").replace(")",""));
+                a.setCurso(TextCurso.getText());
+                a.setSemestre(Integer.parseInt(TextSemestre.getText()));
+                a.setPeriodo(ComboPeriodo.getSelectedIndex()+1);
                 a.atualizar();
                 a=new Aluno();
                 TextNome.setText("");
@@ -374,6 +440,8 @@ public class ControleAluno extends javax.swing.JFrame {
                 TextRal.setText("");
                 TextEmail.setText("@fatec.sp.gov.br");
                 TextTelefone.setText("");
+                TextCurso.setText("");
+                TextSemestre.setText("00");
                 ButAlterar.setVisible(false);
                 ButExcluir.setVisible(false);
             }
@@ -421,10 +489,13 @@ public class ControleAluno extends javax.swing.JFrame {
     private javax.swing.JButton ButGravar;
     private javax.swing.JButton ButPesquisarN;
     private javax.swing.JButton ButPesquisarR;
+    private javax.swing.JComboBox ComboPeriodo;
+    private javax.swing.JTextField TextCurso;
     private javax.swing.JTextField TextEmail;
     private javax.swing.JTextField TextNome;
     private javax.swing.JFormattedTextField TextRG;
     private javax.swing.JFormattedTextField TextRal;
+    private javax.swing.JFormattedTextField TextSemestre;
     private javax.swing.JFormattedTextField TextTelefone;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -432,6 +503,9 @@ public class ControleAluno extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

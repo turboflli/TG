@@ -2,6 +2,7 @@ package view;
 
 import Model.EmprestimoManenger;
 import Model.GeradorRelatorios;
+import java.util.GregorianCalendar;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -26,6 +27,9 @@ public class Menu extends javax.swing.JFrame {
             lcont.setText("Emprestimos previstos para hoje: "+Integer.toString(cont));
         }
         }).start();
+        GregorianCalendar calen=new GregorianCalendar();
+        jComboBox1.setSelectedIndex(calen.getTime().getMonth());
+        calen=null;
     }
 
     /**

@@ -104,14 +104,14 @@ public class GeradorRelatorios extends Thread{
             
             
             stm = con.createStatement();
-            ResultSet rs=stm.executeQuery("select a.nome, c.liv1,c.liv2,c.dr,c.dd from aluno a right join (select c.ida as idaluno,c.til1 as liv1, l.titulo as liv2,c.rea as dr,c.dev as dd from livro l right join (select e.aluno as ida,l.titulo as til1 ,e.livro2 as id2,e.dataRealizacao as rea,e.dataDevolucao as dev from livro l inner join emprestimo e where e.pendentes>0 and e.livro1=l.id and e.dataRealizacao like '__"+this.mes+"____') as c on l.id=id2)as c on c.idaluno=a.id");
+            ResultSet rs=stm.executeQuery("select a.nome, c.liv1,c.autor1,c.liv2,c.autor2,c.dr,c.dd from aluno a right join (select c.ida as idaluno,c.til1 as liv1,c.aut1 as autor1 , l.titulo as liv2,l.autor as autor2,c.rea as dr,c.dev as dd from livro l right join (select e.aluno as ida,l.titulo as til1,l.autor as aut1 ,e.livro2 as id2,e.dataRealizacao as rea,e.dataDevolucao as dev from livro l inner join emprestimo e where e.pendentes>0 and e.livro1=l.id and e.dataRealizacao like '__"+this.mes+"____') as c on l.id=id2)as c on c.idaluno=a.id");
             
             String data="";
             
         while(rs.next()){
             cell1 = new PdfPCell(new Paragraph(rs.getString("nome")));
-            cell2 = new PdfPCell(new Paragraph(rs.getString("liv1")));
-            cell3 = new PdfPCell(new Paragraph(rs.getString("liv2")));
+            cell2 = new PdfPCell(new Paragraph(rs.getString("liv1")+"¬"+rs.getString("autor1")));
+            cell3 = new PdfPCell(new Paragraph(rs.getString("liv2")+"¬"+rs.getString("autor2")));
             data=rs.getString("dr");
             data=data.substring(0, 2)+"/"+data.substring(2,4)+"/"+data.substring(4);
             cell4 = new PdfPCell(new Paragraph(data));
@@ -186,13 +186,13 @@ public class GeradorRelatorios extends Thread{
             
             
                 stm = con.createStatement();
-                ResultSet rs=stm.executeQuery("select l.titulo as titulo,e.dataRealizacao as dr from livro l inner join livrosprofessor e on e.devolvido=false and e.idlivro=l.id  and e.dataRealizacao like '__"+this.mes+"____' and e.idprofessor="+id);
+                ResultSet rs=stm.executeQuery("select l.titulo as titulo,l.autor as autor,e.dataRealizacao as dr from livro l inner join livrosprofessor e on e.devolvido=false and e.idlivro=l.id  and e.dataRealizacao like '__"+this.mes+"____' and e.idprofessor="+id);
             
                 String data="";
                 //atuais
                 while(rs.next()){
 
-                    cell2 = new PdfPCell(new Paragraph(rs.getString("titulo")));
+                    cell2 = new PdfPCell(new Paragraph(rs.getString("titulo")+"¬"+rs.getString("autor")));
 
                     data=rs.getString("dr");
                     data=data.substring(0, 2)+"/"+data.substring(2,4)+"/"+data.substring(4);
@@ -228,13 +228,13 @@ public class GeradorRelatorios extends Thread{
                 table.addCell(cell2);
                 table.addCell(cell3);
                 //devolvidos
-                rs=stm.executeQuery("select l.titulo as titulo,e.dataRealizacao as dr from livro l inner join livrosprofessor e on e.devolvido=true and e.idlivro=l.id  and e.dataRealizacao like '__"+this.mes+"____' and e.idprofessor="+id);
+                rs=stm.executeQuery("select l.titulo as titulo,l.autor as autor,e.dataRealizacao as dr from livro l inner join livrosprofessor e on e.devolvido=true and e.idlivro=l.id  and e.dataRealizacao like '__"+this.mes+"____' and e.idprofessor="+id);
             
                 data="";
             
                 while(rs.next()){
 
-                    cell2 = new PdfPCell(new Paragraph(rs.getString("titulo")));
+                    cell2 = new PdfPCell(new Paragraph(rs.getString("titulo")+"¬"+rs.getString("autor")));
 
                     data=rs.getString("dr");
                     data=data.substring(0, 2)+"/"+data.substring(2,4)+"/"+data.substring(4);
@@ -316,14 +316,14 @@ public class GeradorRelatorios extends Thread{
             
             
             stm = con.createStatement();
-            ResultSet rs=stm.executeQuery("select a.nome, c.liv1,c.liv2,c.dr,c.dd,c.multa,c.dp from aluno a right join (select c.ida as idaluno,c.til1 as liv1, l.titulo as liv2,c.rea as dr,c.dev as dd, c.tax as multa,c.pag as dp from livro l right join (select e.multa as tax, e.dataPagamento as pag,e.aluno as ida,l.titulo as til1 ,e.livro2 as id2,e.dataRealizacao as rea,e.dataDevolucao as dev from livro l inner join emprestimo e where e.multa>0 and e.livro1=l.id and e.dataRealizacao like '__"+this.mes+"____') as c on l.id=id2)as c on c.idaluno=a.id");
+            ResultSet rs=stm.executeQuery("select a.nome, c.liv1,c.autor1,c.liv2,c.autor2,c.dr,c.dd,c.multa,c.dp from aluno a right join (select c.ida as idaluno,c.til1 as liv1,c.aut1 as autor1, l.titulo as liv2,l.autor as autor2,c.rea as dr,c.dev as dd, c.tax as multa,c.pag as dp from livro l right join (select e.multa as tax, e.dataPagamento as pag,e.aluno as ida,l.titulo as til1,l.autor as aut1 ,e.livro2 as id2,e.dataRealizacao as rea,e.dataDevolucao as dev from livro l inner join emprestimo e where e.multa>0 and e.livro1=l.id and e.dataRealizacao like '__"+this.mes+"____') as c on l.id=id2)as c on c.idaluno=a.id");
             
             String data="";
             
             while(rs.next()){
                 cell1 = new PdfPCell(new Paragraph(rs.getString("nome")));
-                cell2 = new PdfPCell(new Paragraph(rs.getString("liv1")));
-                cell3 = new PdfPCell(new Paragraph(rs.getString("liv2")));
+                cell2 = new PdfPCell(new Paragraph(rs.getString("liv1")+"¬"+rs.getString("autor1")));
+                cell3 = new PdfPCell(new Paragraph(rs.getString("liv2")+"¬"+rs.getString("autor2")));
                 data=rs.getString("dr");
                 data=data.substring(0, 2)+"/"+data.substring(2,4)+"/"+data.substring(4);
                 cell4 = new PdfPCell(new Paragraph(data));

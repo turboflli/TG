@@ -18,8 +18,8 @@ import javax.swing.JOptionPane;
  * @author Lucas
  */
 public class Aluno {
-    private String nome,rg,email,ra,telefone;
-    private int id;
+    private String nome,rg,email,ra,telefone,curso;
+    private int id,semestre,periodo;
     
     private Connection con=new Conexao().conectar();
     /**
@@ -97,8 +97,8 @@ public class Aluno {
     public void cadastrar(){
         try {
             Statement stm=con.createStatement();
-            stm.execute("insert into aluno(nome,rg,ra,email,telefone) values"
-                    + "('"+this.nome+"','"+this.rg+"','"+this.ra+"','"+this.email+"','"+this.telefone+"')");
+            stm.execute("insert into aluno(nome,rg,ra,email,telefone,curso,semestre,periodo) values"
+                    + "('"+this.nome+"','"+this.rg+"','"+this.ra+"','"+this.email+"','"+this.telefone+"','"+this.curso+"',"+this.semestre+","+this.periodo+")");
             JOptionPane.showMessageDialog(null, "Cadastrado com sucesso","Sucesso",JOptionPane.PLAIN_MESSAGE);
         } catch (SQLException ex) {
             Logger.getLogger(Aluno.class.getName()).log(Level.SEVERE, null, ex);
@@ -111,7 +111,7 @@ public class Aluno {
         int u=0;
         try {
             stm = con.createStatement();
-            ResultSet rs=stm.executeQuery("select * from aluno where nome='"+nome+"'");
+            ResultSet rs=stm.executeQuery("select * from aluno where upper(nome) like upper('%"+nome+"%')");
             
             while(rs.next()){
                 u++;
@@ -121,6 +121,9 @@ public class Aluno {
                 this.ra=rs.getString("ra");
                 this.email=rs.getString("email");
                 this.telefone=rs.getString("telefone");
+                this.curso=rs.getString("curso");
+                this.semestre=rs.getInt("semestre");
+                this.periodo=rs.getInt("periodo");
             }
         } catch (SQLException ex) {
             Logger.getLogger(Aluno.class.getName()).log(Level.SEVERE, null, ex);
@@ -149,7 +152,8 @@ public class Aluno {
     public void atualizar(){
         try {
             Statement stm=con.createStatement();
-            stm.execute("update aluno set nome='"+this.nome+"',rg='"+this.rg+"',ra='"+this.ra+"',email='"+this.email+"',telefone='"+this.telefone+"' where id="+this.id);
+            stm.execute("update aluno set nome='"+this.nome+"',rg='"+this.rg+"',ra='"+this.ra+"',email='"+this.email+"',telefone='"+this.telefone+"'"
+                    + ",curso='"+this.curso+"',semestre="+this.semestre+",periodo="+this.periodo+" where id="+this.id);
             JOptionPane.showMessageDialog(null, "Alteração feita com sucesso","Sucesso",JOptionPane.PLAIN_MESSAGE);
         } catch (SQLException ex) {
             Logger.getLogger(Aluno.class.getName()).log(Level.SEVERE, null, ex);
@@ -171,6 +175,9 @@ public class Aluno {
                 this.ra=rs.getString("ra");
                 this.email=rs.getString("email");
                 this.telefone=rs.getString("telefone");
+                this.curso=rs.getString("curso");
+                this.semestre=rs.getInt("semestre");
+                this.periodo=rs.getInt("periodo");
             }
         } catch (SQLException ex) {
             Logger.getLogger(Aluno.class.getName()).log(Level.SEVERE, null, ex);
@@ -181,6 +188,48 @@ public class Aluno {
         }else{
             return true;
         }
+    }
+
+    /**
+     * @return the curso
+     */
+    public String getCurso() {
+        return curso;
+    }
+
+    /**
+     * @param curso the curso to set
+     */
+    public void setCurso(String curso) {
+        this.curso = curso;
+    }
+
+    /**
+     * @return the semestre
+     */
+    public int getSemestre() {
+        return semestre;
+    }
+
+    /**
+     * @param semestre the semestre to set
+     */
+    public void setSemestre(int semestre) {
+        this.semestre = semestre;
+    }
+
+    /**
+     * @return the periodo
+     */
+    public int getPeriodo() {
+        return periodo;
+    }
+
+    /**
+     * @param periodo the periodo to set
+     */
+    public void setPeriodo(int periodo) {
+        this.periodo = periodo;
     }
 
     

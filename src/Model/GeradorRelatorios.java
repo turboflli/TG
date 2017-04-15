@@ -360,5 +360,84 @@ public class GeradorRelatorios extends Thread{
         }
             
     }
+    
+    
+    public static void GerarReservas(){
+        Statement stm;
+        try {
+            
+            
+            Document documento=new Document();
+            
+            
+            FileOutputStream ot=new FileOutputStream("Reservas_atuais.pdf", true);
+            PdfWriter.getInstance(documento, ot);
+            
+            documento.open();
+            Paragraph pa=new Paragraph();
+          Font fonte =new Font(Font.FontFamily.TIMES_ROMAN , 28, Font.BOLD,new BaseColor(0,0,0));
+         pa.setFont(fonte);
+          pa.setAlignment(Element.ALIGN_CENTER);
+          pa.setSpacingAfter(50);
+        pa.add("Emprestimos Atuais");
+        documento.add(pa);
+            PdfPTable table = new PdfPTable(5);
+
+            PdfPCell cell1 = new PdfPCell(new Paragraph("Aluno"));
+            PdfPCell cell2 = new PdfPCell(new Paragraph("livro1"));
+            PdfPCell cell3 = new PdfPCell(new Paragraph("livro2"));
+            PdfPCell cell4 = new PdfPCell(new Paragraph("realizacao"));
+            PdfPCell cell5 = new PdfPCell(new Paragraph("Final"));
+            
+            float[] marge=new float[5];
+            marge[0]=135.0f;
+            marge[1]=135.0f;
+            marge[2]=135.0f;
+            marge[3]=75.0f;
+            marge[4]=75.0f;
+            table.setTotalWidth(marge);
+            table.setLockedWidth(true);
+
+            table.addCell(cell1);
+            table.addCell(cell2);
+            table.addCell(cell3);
+            table.addCell(cell4);
+            table.addCell(cell5);
+            
+            
+            stm = new Conexao().conectar().createStatement();
+            ResultSet rs=stm.executeQuery("select a.nome, c.liv1,c.autor1,c.liv2,c.autor2,c.dr,c.dd from aluno a right join (select c.ida as idaluno,c.til1 as liv1,c.aut1 as autor1 , l.titulo as liv2,l.autor as autor2,c.rea as dr,c.dev as dd from livro l right join (select e.aluno as ida,l.titulo as til1,l.autor as aut1 ,e.livro2 as id2,e.dataRealizacao as rea,e.dataDevolucao as dev from livro l inner join reserva e where  e.livro1=l.id ) as c on l.id=id2)as c on c.idaluno=a.id");
+            
+            String data="";
+            
+        while(rs.next()){
+            cell1 = new PdfPCell(new Paragraph(rs.getString("nome")));
+            cell2 = new PdfPCell(new Paragraph(rs.getString("liv1")+"¬"+rs.getString("autor1")));
+            cell3 = new PdfPCell(new Paragraph(rs.getString("liv2")+"¬"+rs.getString("autor2")));
+            data=rs.getString("dr");
+            data=data.substring(0, 2)+"/"+data.substring(2,4)+"/"+data.substring(4);
+            cell4 = new PdfPCell(new Paragraph(data));
+            data=rs.getString("dd");
+            data=data.substring(0, 2)+"/"+data.substring(2,4)+"/"+data.substring(4);
+            cell5 = new PdfPCell(new Paragraph(data));
+            table.addCell(cell1);
+            table.addCell(cell2);
+            table.addCell(cell3);
+            table.addCell(cell4);
+            table.addCell(cell5);
+        }
+        documento.add(table);
+        documento.close();
+        JOptionPane.showMessageDialog(null,"PDF das reservas pronto","termino",JOptionPane.INFORMATION_MESSAGE);
+        
+        
+        } catch (SQLException ex) {
+            Logger.getLogger(GeradorRelatorios.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(GeradorRelatorios.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DocumentException ex) {
+            Logger.getLogger(GeradorRelatorios.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
 }

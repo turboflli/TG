@@ -105,7 +105,7 @@ public class EmprestimoManenger {
             Logger.getLogger(EmprestimoManenger.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public static void multar(Emprestimos e){
+   /* public static void multar(Emprestimos e){
         Statement stm;
         try {
         stm = con.createStatement();
@@ -113,7 +113,7 @@ public class EmprestimoManenger {
         } catch (SQLException ex) {
             Logger.getLogger(EmprestimoManenger.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
+    */
     public static boolean pagar(Emprestimos e){
         if(e.getPendentes()==0){
             Statement stm;
@@ -159,5 +159,28 @@ public class EmprestimoManenger {
                 Logger.getLogger(EmprestimoManenger.class.getName()).log(Level.SEVERE, null, ex);
             }
 
+    }
+    
+    public static void killreserva(String data){
+        Statement stm;
+            try {
+            stm = con.createStatement();
+            stm.execute("delete from reserva where str_to_date(dataDevolucao,'%d%m%Y')<STR_TO_DATE('"+data+"','%d/%m/%Y')");
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(EmprestimoManenger.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    }
+    
+    public static void atualizarMulta(String data){
+
+    Statement stm;
+        try {
+            stm = con.createStatement();
+            stm.execute("update emprestimo e set e.multa=e.multa+1 where e.pendentes>0 and  str_to_date(dataDevolucao,'%d%m%Y')<STR_TO_DATE('"+data+"','%d/%m/%Y')");
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(EmprestimoManenger.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }
 }

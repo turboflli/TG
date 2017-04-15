@@ -2,7 +2,9 @@ package view;
 
 import Model.EmprestimoManenger;
 import Model.GeradorRelatorios;
+import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -29,6 +31,17 @@ public class Menu extends javax.swing.JFrame {
         }).start();
         GregorianCalendar calen=new GregorianCalendar();
         jComboBox1.setSelectedIndex(calen.getTime().getMonth());
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); 
+        String data=formato.format(calen.getTime());
+        new Thread(new Runnable() {
+        public void run() {
+            EmprestimoManenger.killreserva(data);
+        }
+        }).start();
+        int resp=JOptionPane.showConfirmDialog(null, "Acrescentar 1 no valor das multas de emprestimos com livros não devolvidos ?", "atualizar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if(resp==JOptionPane.YES_OPTION){
+            EmprestimoManenger.atualizarMulta(data);
+            }
         calen=null;
     }
 

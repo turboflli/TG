@@ -300,7 +300,7 @@ public class ControleDevolucao extends javax.swing.JFrame {
                 }else{
                     TextMulta.setText("0"+Integer.toString(escolhido.getMulta()));
                 }
-            }else{
+            }/*else{  //se não tiver multa calcular multa
                 Date tempo;
                 Date hoje;
                 try {
@@ -322,7 +322,7 @@ public class ControleDevolucao extends javax.swing.JFrame {
                 } catch (ParseException ex) {
                     Logger.getLogger(ControleDevolucao.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }
+            }*/
         }
     }//GEN-LAST:event_jComboBox1ItemStateChanged
 
@@ -427,7 +427,7 @@ public class ControleDevolucao extends javax.swing.JFrame {
 
     
     
-    private void multar(){
+    /*private void multar(){
         jLabel2.setVisible(true);
         TextMulta.setVisible(true);
         ButPagar.setVisible(true);
@@ -455,7 +455,7 @@ public class ControleDevolucao extends javax.swing.JFrame {
                 Logger.getLogger(ControleDevolucao.class.getName()).log(Level.SEVERE, null, ex);
             }
         
-    }
+    }*/
     
     
     

@@ -55,6 +55,7 @@ public class ControleLivro extends javax.swing.JFrame {
         ButExcluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Controle de Livros");
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(253, 253, 253));

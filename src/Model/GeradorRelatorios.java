@@ -209,7 +209,7 @@ public class GeradorRelatorios extends Thread{
                 pa.setFont(fonte);
                 pa.setAlignment(Element.ALIGN_CENTER);
                 pa.setSpacingAfter(50);
-                pa.add("atualament com o(a) professor(a)");
+                pa.add("atualamente com o(a) professor(a)");
                 documento.add(pa);
                 documento.add(table);
                 

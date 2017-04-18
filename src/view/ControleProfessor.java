@@ -44,6 +44,7 @@ public class ControleProfessor extends javax.swing.JFrame {
         ButExcluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Controle de Pprofessores");
 
         jPanel1.setBackground(new java.awt.Color(253, 253, 253));
         jPanel1.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 56, 61), 14), javax.swing.BorderFactory.createLineBorder(new java.awt.Color(211, 217, 217), 8)));

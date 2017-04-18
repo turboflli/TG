@@ -42,6 +42,7 @@ public class DevolucaoProfessor extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Devolução de Professores");
 
         jPanel1.setBackground(new java.awt.Color(253, 253, 253));
         jPanel1.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(45, 56, 51), 14), javax.swing.BorderFactory.createLineBorder(new java.awt.Color(211, 217, 217), 8)));
@@ -49,6 +50,7 @@ public class DevolucaoProfessor extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Nome:");
 
+        TextNome.setEditable(false);
         TextNome.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         TextNome.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -115,12 +117,16 @@ public class DevolucaoProfessor extends javax.swing.JFrame {
     private void TextNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TextNomeKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
         String h=lpm.listarProfessores(TextNome.getText());
-        TextNome.setText(h);
-        ArrayList<String> result=lpm.listarLivros(lpm.descobrirProfessor(h));
-        jComboBox1.removeAllItems();
-        for(int o=0;o<result.size();o++){
-            jComboBox1.addItem(result.get(o));
-        }
+        if(h.length()>0){
+            TextNome.setText(h);
+            ArrayList<String> result=lpm.listarLivros(lpm.descobrirProfessor(h));
+            jComboBox1.removeAllItems();
+            for(int o=0;o<result.size();o++){
+                jComboBox1.addItem(result.get(o));
+            }
+        }else{
+                JOptionPane.showMessageDialog(null, "Nenhum professor encontrado","Vazio",JOptionPane.ERROR_MESSAGE);
+            }
         //System.out.println(h);
         }
     }//GEN-LAST:event_TextNomeKeyPressed

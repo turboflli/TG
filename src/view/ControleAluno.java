@@ -41,8 +41,9 @@ public class ControleAluno extends javax.swing.JFrame {
         ButExcluir.setVisible(false);
         ButAlterar.setVisible(false);
         a=new Aluno();
-        System.load("E:/open/opencv/build/java/x86/opencv_java2410.dll");
+        //System.load("E:/open/opencv/build/java/x86/opencv_java2410.dll");
         
+        System.load(System.getProperty("user.dir")+"\\opencv_java2410.dll");
     }
 
     /**
@@ -79,6 +80,7 @@ public class ControleAluno extends javax.swing.JFrame {
         ComboPeriodo = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Controle de Alunos");
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(253, 253, 253));

@@ -40,7 +40,12 @@ public class Menu extends javax.swing.JFrame {
         }).start();
         int resp=JOptionPane.showConfirmDialog(null, "Acrescentar 1 no valor das multas de emprestimos com livros não devolvidos ?", "atualizar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if(resp==JOptionPane.YES_OPTION){
-            EmprestimoManenger.atualizarMulta(data);
+            new Thread(new Runnable() {
+            public void run() {
+                EmprestimoManenger.atualizarMulta(data);
+            }
+            }).start();
+            
             }
         calen=null;
     }
@@ -70,6 +75,7 @@ public class Menu extends javax.swing.JFrame {
         lcont = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Menu");
 
         jPanel1.setBackground(new java.awt.Color(253, 253, 253));
         jPanel1.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(45, 46, 51), 14), javax.swing.BorderFactory.createLineBorder(new java.awt.Color(211, 217, 217), 8)));

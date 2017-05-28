@@ -121,7 +121,7 @@ public class ControleReserva extends javax.swing.JFrame {
         jLabel6.setText("Data de");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel5.setText("Devoluçaõ");
+        jLabel5.setText("Expiração");
 
         try {
             TextDataD.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
@@ -260,6 +260,7 @@ public class ControleReserva extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         ArrayList<String> comp=new ArrayList<String>();
+        Lista1.removeAllItems();
         comp=e.listarTitulo(TextLivro1.getText());
         if(comp.size()>=1){
             for (String vez:comp){
@@ -272,6 +273,7 @@ public class ControleReserva extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         ArrayList<String> comp=new ArrayList<String>();
+        Lista2.removeAllItems();
         comp=e.listarTitulo(TextLivro2.getText());
         if(comp.size()>=1){
             for (String vez:comp){

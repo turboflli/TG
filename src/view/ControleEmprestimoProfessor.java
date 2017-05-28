@@ -152,6 +152,7 @@ public class ControleEmprestimoProfessor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       Lista1.removeAllItems();
         ArrayList<String> comp=new ArrayList<String>();
         
         comp=e.listarTitulo(TextLivro1.getText());

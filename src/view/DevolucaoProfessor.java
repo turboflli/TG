@@ -50,7 +50,6 @@ public class DevolucaoProfessor extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Nome:");
 
-        TextNome.setEditable(false);
         TextNome.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         TextNome.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -136,7 +135,6 @@ public class DevolucaoProfessor extends javax.swing.JFrame {
        LivroProfessor lp=new LivroProfessor();
        lp.setProf(lpm.descobrirProfessor(TextNome.getText()));
        String liv=jComboBox1.getSelectedItem().toString();
-       System.out.print(liv);
        lp.setLiv(lpm.descobrirLivro(liv.split("¬")[0],liv.split("¬")[1]));
        lpm.devolverLivro(lp);
        jComboBox1.removeAllItems();

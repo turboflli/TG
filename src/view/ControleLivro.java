@@ -274,6 +274,7 @@ public class ControleLivro extends javax.swing.JFrame {
 
     private void ButListaTituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButListaTituloActionPerformed
         ArrayList<String> comp=new ArrayList<String>();
+        Lista.removeAllItems();
         comp=l.listarTitulo(TextTitulo.getText());
          if(comp.size()>=1){
             for (String vez:comp){
@@ -286,6 +287,7 @@ public class ControleLivro extends javax.swing.JFrame {
 
     private void ButListaAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButListaAutorActionPerformed
         ArrayList<String> comp=new ArrayList<String>();
+        Lista.removeAllItems();
         comp=l.listarAutor(TextAutor.getText());
         if(comp.size()>=1){
             for (String vez:comp){

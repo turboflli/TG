@@ -295,13 +295,21 @@ public class ControleDevolucao extends javax.swing.JFrame {
             lRealizacao.setVisible(true);
             lDevolucao.setVisible(true);
             jLabel1.setVisible(true);
-            if(escolhido.getPendentes()==0 && escolhido.getMulta()>0){
+            if( escolhido.getMulta()>0){
+                jLabel2.setVisible(true);
+                TextMulta.setVisible(true);
+                ButPagar.setVisible(true);
                 if(escolhido.getMulta()>9){
                 TextMulta.setText(Integer.toString(escolhido.getMulta()));
                 }else{
                     TextMulta.setText("0"+Integer.toString(escolhido.getMulta()));
                 }
-            }/*else{  //se não tiver multa calcular multa
+            }else{
+                jLabel2.setVisible(false);
+                TextMulta.setVisible(false);
+                ButPagar.setVisible(false);
+            }
+            /*else{  //se não tiver multa calcular multa
                 Date tempo;
                 Date hoje;
                 try {
@@ -377,6 +385,9 @@ public class ControleDevolucao extends javax.swing.JFrame {
              d=7;
          }
          String h=escolhido.getDataDevolucao();
+         if(escolhido.getDataDevolucao().equals(formato.format(calen.getTime()).replace("/", ""))){
+            Menu.menos1();
+        }
          h=h.substring(0, 2)+"/"+h.substring(2, 4)+"/"+h.substring(4);
         try {
             calen.setTime(formato.parse(h));
@@ -389,6 +400,7 @@ public class ControleDevolucao extends javax.swing.JFrame {
          escolhido.setDataDevolucao(h.replace("/",""));
          EmprestimoManenger.adiar(escolhido);
         listaEmprestimos.set(jComboBox1.getSelectedIndex(), escolhido);
+        
     }//GEN-LAST:event_ButAdiarActionPerformed
 
     /**

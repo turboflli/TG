@@ -379,7 +379,7 @@ public class GeradorRelatorios extends Thread{
          pa.setFont(fonte);
           pa.setAlignment(Element.ALIGN_CENTER);
           pa.setSpacingAfter(50);
-        pa.add("Emprestimos Atuais");
+        pa.add("Reservas Atuais");
         documento.add(pa);
             PdfPTable table = new PdfPTable(5);
 

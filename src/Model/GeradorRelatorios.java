@@ -24,6 +24,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import view.Menu;
 
 /**
  *
@@ -104,10 +105,12 @@ public class GeradorRelatorios extends Thread{
             
             
             stm = con.createStatement();
-            ResultSet rs=stm.executeQuery("select a.nome, c.liv1,c.autor1,c.liv2,c.autor2,c.dr,c.dd from aluno a right join (select c.ida as idaluno,c.til1 as liv1,c.aut1 as autor1 , l.titulo as liv2,l.autor as autor2,c.rea as dr,c.dev as dd from livro l right join (select e.aluno as ida,l.titulo as til1,l.autor as aut1 ,e.livro2 as id2,e.dataRealizacao as rea,e.dataDevolucao as dev from livro l inner join emprestimo e where e.pendentes>0 and e.livro1=l.id and e.dataRealizacao like '__"+this.mes+"____') as c on l.id=id2)as c on c.idaluno=a.id");
+            ResultSet rs=stm.executeQuery("select a.nome, c.liv1,c.autor1,c.liv2,c.autor2,c.dr,c.dd from aluno a right join (select c.ida as idaluno,c.til1 as liv1,c.aut1 as autor1 , l.titulo as liv2,l.autor as autor2,c.rea as dr,c.dev as dd from livro l right join (select e.aluno as ida,l.titulo as til1,l.autor as aut1 ,e.livro2 as id2,e.dataRealizacao as rea,e.dataDevolucao as dev from livro l inner join emprestimo e where e.multa=0 and e.livro1=l.id and e.dataRealizacao like '__"+this.mes+"____') as c on l.id=id2)as c on c.idaluno=a.id");
             
             String data="";
-            
+            rs.last();
+           Menu.setMax(rs.getRow());
+            rs.beforeFirst();
         while(rs.next()){
             cell1 = new PdfPCell(new Paragraph(rs.getString("nome")));
             cell2 = new PdfPCell(new Paragraph(rs.getString("liv1")+"¬"+rs.getString("autor1")));
@@ -123,6 +126,13 @@ public class GeradorRelatorios extends Thread{
             table.addCell(cell3);
             table.addCell(cell4);
             table.addCell(cell5);
+            
+            new Thread(new Runnable() {
+            public void run() {
+                Menu.inc();
+            }
+            }).start();
+            
         }
         documento.add(table);
         documento.close();
@@ -155,7 +165,9 @@ public class GeradorRelatorios extends Thread{
             
             Statement el=con.createStatement();
             ResultSet els=el.executeQuery("select id,nome from professor");
-            
+            els.last();
+           Menu.setMax(els.getRow());
+            els.beforeFirst();
             while(els.next()){
                 
                 id=els.getInt("id");
@@ -253,7 +265,11 @@ public class GeradorRelatorios extends Thread{
                 pa.add("já devolvidos");
                 documento.add(pa);
                 documento.add(table);
-                
+                new Thread(new Runnable() {
+            public void run() {
+                Menu.inc();
+            }
+            }).start();
             }
             
             
@@ -319,7 +335,9 @@ public class GeradorRelatorios extends Thread{
             ResultSet rs=stm.executeQuery("select a.nome, c.liv1,c.autor1,c.liv2,c.autor2,c.dr,c.dd,c.multa,c.dp from aluno a right join (select c.ida as idaluno,c.til1 as liv1,c.aut1 as autor1, l.titulo as liv2,l.autor as autor2,c.rea as dr,c.dev as dd, c.tax as multa,c.pag as dp from livro l right join (select e.multa as tax, e.dataPagamento as pag,e.aluno as ida,l.titulo as til1,l.autor as aut1 ,e.livro2 as id2,e.dataRealizacao as rea,e.dataDevolucao as dev from livro l inner join emprestimo e where e.multa>0 and e.livro1=l.id and e.dataRealizacao like '__"+this.mes+"____') as c on l.id=id2)as c on c.idaluno=a.id");
             
             String data="";
-            
+            rs.last();
+           Menu.setMax(rs.getRow());
+            rs.beforeFirst();
             while(rs.next()){
                 cell1 = new PdfPCell(new Paragraph(rs.getString("nome")));
                 cell2 = new PdfPCell(new Paragraph(rs.getString("liv1")+"¬"+rs.getString("autor1")));
@@ -346,6 +364,11 @@ public class GeradorRelatorios extends Thread{
                 table.addCell(cell5);
                 table.addCell(cell6);
                 table.addCell(cell7);
+                new Thread(new Runnable() {
+            public void run() {
+                Menu.inc();
+            }
+            }).start();
             }
             documento.add(table);
             documento.close();

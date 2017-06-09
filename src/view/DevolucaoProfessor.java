@@ -17,13 +17,13 @@ import javax.swing.JOptionPane;
  */
 public class DevolucaoProfessor extends javax.swing.JFrame {
 
-    LivroProfessorManenger lpm;
+    
     /**
      * Creates new form DevolucaoProfessor
      */
     public DevolucaoProfessor() {
         initComponents();
-        lpm=new LivroProfessorManenger();
+        
     }
 
     /**
@@ -115,10 +115,10 @@ public class DevolucaoProfessor extends javax.swing.JFrame {
 
     private void TextNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TextNomeKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-        String h=lpm.listarProfessores(TextNome.getText());
+        String h=LivroProfessorManenger.listarProfessores(TextNome.getText());
         if(h.length()>0){
             TextNome.setText(h);
-            ArrayList<String> result=lpm.listarLivros(lpm.descobrirProfessor(h));
+            ArrayList<String> result=LivroProfessorManenger.listarLivros(LivroProfessorManenger.descobrirProfessor(h));
             jComboBox1.removeAllItems();
             for(int o=0;o<result.size();o++){
                 jComboBox1.addItem(result.get(o));
@@ -133,10 +133,10 @@ public class DevolucaoProfessor extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        
        LivroProfessor lp=new LivroProfessor();
-       lp.setProf(lpm.descobrirProfessor(TextNome.getText()));
+       lp.setProf(LivroProfessorManenger.descobrirProfessor(TextNome.getText()));
        String liv=jComboBox1.getSelectedItem().toString();
-       lp.setLiv(lpm.descobrirLivro(liv.split("¬")[0],liv.split("¬")[1]));
-       lpm.devolverLivro(lp);
+       lp.setLiv(LivroProfessorManenger.descobrirLivro(liv.split("¬")[0],liv.split("¬")[1]));
+       LivroProfessorManenger.devolverLivro(lp);
        jComboBox1.removeAllItems();
     }//GEN-LAST:event_jButton1ActionPerformed
 

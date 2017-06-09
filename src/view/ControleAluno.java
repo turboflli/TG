@@ -1,6 +1,7 @@
 package view;
 
 import Model.Aluno;
+import Model.AlunoMananger;
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.MultiFormatReader;
 import com.google.zxing.NotFoundException;
@@ -315,8 +316,8 @@ public class ControleAluno extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ButPesquisarNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButPesquisarNActionPerformed
-        
-        if(a.consultarPorNome(TextNome.getText())) {
+        a=AlunoMananger.consultarPorNome(TextNome.getText());
+        if(a!=null) {
             TextNome.setText(a.getNome());
             TextRG.setText(a.getRg());
             TextRal.setText(a.getRa());
@@ -376,12 +377,12 @@ public class ControleAluno extends javax.swing.JFrame {
        a.setCurso(TextCurso.getText());
        a.setSemestre(Integer.parseInt(TextSemestre.getText()));
        a.setPeriodo(ComboPeriodo.getSelectedIndex()+1);
-       a.cadastrar();
+       AlunoMananger.cadastrar(a);
     }//GEN-LAST:event_ButGravarActionPerformed
 
     private void ButPesquisarRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButPesquisarRActionPerformed
-        
-        if(a.consultarPorRa(TextRal.getText().replace(".", "")) ) {
+        a=AlunoMananger.consultarPorRa(TextRal.getText().replace(".", ""));
+        if(a!=null ) {
             TextRG.setText(a.getRg());
             TextNome.setText((a.getNome()));
             TextEmail.setText(a.getEmail());
@@ -406,7 +407,7 @@ public class ControleAluno extends javax.swing.JFrame {
             
             String respost=JOptionPane.showInputDialog(null, "Escreva 'deletar' \nignorar maiusculo e minusculo", "Confirmação", JOptionPane.QUESTION_MESSAGE);
             if(respost.equalsIgnoreCase("deletar")){
-                a.deletar();
+                AlunoMananger.deletar(a);
                 a=new Aluno();
                 TextNome.setText("");
                 TextRG.setText("");
@@ -435,7 +436,7 @@ public class ControleAluno extends javax.swing.JFrame {
                 a.setCurso(TextCurso.getText());
                 a.setSemestre(Integer.parseInt(TextSemestre.getText()));
                 a.setPeriodo(ComboPeriodo.getSelectedIndex()+1);
-                a.atualizar();
+                AlunoMananger.atualizar(a);
                 a=new Aluno();
                 TextNome.setText("");
                 TextRG.setText("");

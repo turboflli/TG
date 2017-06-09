@@ -19,8 +19,8 @@ import javax.swing.JOptionPane;
  * @author Lucas
  */
 public class LivroProfessorManenger {
-    private Connection con=new Conexao().conectar();
-    public void cadastrar(LivroProfessor lp){
+    private static Connection con=new Conexao().conectar();
+    public static void cadastrar(LivroProfessor lp){
         try {
             Statement stm=con.createStatement();
             ResultSet rs=stm.executeQuery("select quantidade from livro where id="+lp.getLiv());
@@ -61,7 +61,7 @@ public class LivroProfessorManenger {
     
     
     
-    public int descobrirProfessor(String nome){
+    public static int descobrirProfessor(String nome){
         int resp=0;
         
             Statement stm;
@@ -80,7 +80,7 @@ public class LivroProfessorManenger {
     }
     
     //retorna o nome completo de um professor pesquisando por um pedaço
-    public String listarProfessores(String nome){
+    public static String listarProfessores(String nome){
         String nom="";
         int u=0;
         try {
@@ -101,7 +101,7 @@ public class LivroProfessorManenger {
         }
     }
     
-    public void devolverLivro(LivroProfessor lp){
+    public static void devolverLivro(LivroProfessor lp){
         try {
             Statement stm=con.createStatement();
             stm.execute("update livrosprofessor set devolvido=true where idprofessor="+lp.getProf()+" and idlivro="+lp.getLiv());
@@ -117,7 +117,7 @@ public class LivroProfessorManenger {
     }
     
     
-    public ArrayList<String> listarLivros(int id){
+    public static ArrayList<String> listarLivros(int id){
         ArrayList<String> lista=new ArrayList<String>();
         try {
             Statement stm=con.createStatement();
@@ -131,7 +131,7 @@ public class LivroProfessorManenger {
         return lista;
     }
     
-    public int descobrirLivro(String titulo,String autor){
+    public static int descobrirLivro(String titulo,String autor){
         int u=0;
         try {
             Statement stm=con.createStatement();

@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 public class ControleProfessor extends javax.swing.JFrame {
 
     private Professor p=new Professor();
-    private ProfessorManenger pm=new ProfessorManenger();
+   
     /**
      * Creates new form ControleProfessor
      */
@@ -150,11 +150,11 @@ public class ControleProfessor extends javax.swing.JFrame {
     private void ButCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButCadastroActionPerformed
         
         p.setNome(TextNome.getText());
-        pm.cadastrar(p);
+        ProfessorManenger.cadastrar(p);
     }//GEN-LAST:event_ButCadastroActionPerformed
 
     private void ButPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButPesquisarActionPerformed
-        p=pm.consultar(TextNome.getText());
+        p=ProfessorManenger.consultar(TextNome.getText());
         if(p.getNome()!=null){
             TextNome.setText(p.getNome());
             ButAlterar.setVisible(true);
@@ -169,7 +169,7 @@ public class ControleProfessor extends javax.swing.JFrame {
             
             String respost=JOptionPane.showInputDialog(null, "Escreva 'deletar' \nignorar maiusculo e minusculo", "Confirmação", JOptionPane.QUESTION_MESSAGE);
             if(respost.equalsIgnoreCase("deletar")){
-        pm.Excluir(p);
+        ProfessorManenger.Excluir(p);
         ButAlterar.setVisible(false);
         ButExcluir.setVisible(false);
             }}
@@ -182,7 +182,7 @@ public class ControleProfessor extends javax.swing.JFrame {
             String respost=JOptionPane.showInputDialog(null, "Escreva 'sim' \nignorar maiusculo e minusculo", "Confirmação", JOptionPane.QUESTION_MESSAGE);
             if(respost.equalsIgnoreCase("sim")){
         p.setNome(TextNome.getText());
-        pm.Alterar(p);
+        ProfessorManenger.Alterar(p);
         ButAlterar.setVisible(false);
         ButExcluir.setVisible(false);
             }}

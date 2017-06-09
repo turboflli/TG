@@ -94,7 +94,7 @@ public class Aluno {
     
     
     
-    public void cadastrar(){
+    /*public void cadastrar(){
         try {
             Statement stm=con.createStatement();
             stm.execute("insert into aluno(nome,rg,ra,email,telefone,curso,semestre,periodo) values"
@@ -115,7 +115,7 @@ public class Aluno {
             
             while(rs.next()){
                 u++;
-                this.id=rs.getInt("id");
+                this.setId(rs.getInt("id"));
                 this.nome=rs.getString("nome");
                 this.rg=rs.getString("rg");
                 this.ra=rs.getString("ra");
@@ -142,7 +142,7 @@ public class Aluno {
     public void deletar(){
         try {
             Statement stm=con.createStatement();
-            stm.execute("delete from aluno where id="+this.id);
+            stm.execute("delete from aluno where id="+this.getId());
             JOptionPane.showMessageDialog(null, "Exclusão feita com sucesso","Sucesso",JOptionPane.PLAIN_MESSAGE);
         } catch (SQLException ex) {
             Logger.getLogger(Aluno.class.getName()).log(Level.SEVERE, null, ex);
@@ -153,7 +153,7 @@ public class Aluno {
         try {
             Statement stm=con.createStatement();
             stm.execute("update aluno set nome='"+this.nome+"',rg='"+this.rg+"',ra='"+this.ra+"',email='"+this.email+"',telefone='"+this.telefone+"'"
-                    + ",curso='"+this.curso+"',semestre="+this.semestre+",periodo="+this.periodo+" where id="+this.id);
+                    + ",curso='"+this.curso+"',semestre="+this.semestre+",periodo="+this.periodo+" where id="+this.getId());
             JOptionPane.showMessageDialog(null, "Alteração feita com sucesso","Sucesso",JOptionPane.PLAIN_MESSAGE);
         } catch (SQLException ex) {
             Logger.getLogger(Aluno.class.getName()).log(Level.SEVERE, null, ex);
@@ -169,7 +169,7 @@ public class Aluno {
             
             while(rs.next()){
                 u++;
-                this.id=rs.getInt("id");
+                this.setId(rs.getInt("id"));
                 this.nome=rs.getString("nome");
                 this.rg=rs.getString("rg");
                 this.ra=rs.getString("ra");
@@ -188,7 +188,7 @@ public class Aluno {
         }else{
             return true;
         }
-    }
+    }*/
 
     /**
      * @return the curso
@@ -230,6 +230,20 @@ public class Aluno {
      */
     public void setPeriodo(int periodo) {
         this.periodo = periodo;
+    }
+
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
     }
 
     

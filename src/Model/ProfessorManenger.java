@@ -18,8 +18,8 @@ import javax.swing.JOptionPane;
  * @author Lucas
  */
 public class ProfessorManenger {
-     private Connection con=new Conexao().conectar();
-    public void cadastrar(Professor p){
+     private static Connection con=new Conexao().conectar();
+    public static void cadastrar(Professor p){
          try {
             Statement stm=con.createStatement();
             stm.execute("insert into professor(nome) values('"+p.getNome()+"')");
@@ -28,7 +28,7 @@ public class ProfessorManenger {
             Logger.getLogger(Aluno.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public void Alterar(Professor p){
+    public static void Alterar(Professor p){
          try {
             Statement stm=con.createStatement();
             stm.execute("update professor set nome ='"+p.getNome()+"' where id="+p.getId());
@@ -37,7 +37,7 @@ public class ProfessorManenger {
             Logger.getLogger(Aluno.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public void Excluir(Professor p){
+    public static void Excluir(Professor p){
         try {
             Statement stm=con.createStatement();
             stm.execute("delete from professor where id="+p.getId());
@@ -47,7 +47,7 @@ public class ProfessorManenger {
         }
     }
     
-    public Professor consultar(String name){
+    public static Professor consultar(String name){
         Professor p=new Professor();
         Statement stm;
         int u=0;

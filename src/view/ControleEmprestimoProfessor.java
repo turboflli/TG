@@ -21,7 +21,7 @@ import javax.swing.JOptionPane;
  */
 public class ControleEmprestimoProfessor extends javax.swing.JFrame {
     private Emprestimos e;
-    private LivroProfessorManenger lpm;
+   
      private GregorianCalendar calen;
     private SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); 
 
@@ -31,7 +31,7 @@ public class ControleEmprestimoProfessor extends javax.swing.JFrame {
     public ControleEmprestimoProfessor() {
         initComponents();
         e=new Emprestimos();
-        lpm=new LivroProfessorManenger();
+        
     }
 
     /**
@@ -172,9 +172,9 @@ public class ControleEmprestimoProfessor extends javax.swing.JFrame {
             e.descobrirLivro1(temp1.split("¬")[0], temp1.split("¬")[1]);
             LivroProfessor lp=new LivroProfessor();
             lp.setLiv(e.getLivro1());
-            lp.setProf(lpm.descobrirProfessor(TextProfessor.getText()));
+            lp.setProf(LivroProfessorManenger.descobrirProfessor(TextProfessor.getText()));
             lp.setData(formato.format(calen.getTime()).replace("/", ""));
-            lpm.cadastrar(lp);
+            LivroProfessorManenger.cadastrar(lp);
             Lista1.removeAllItems();
         
 
@@ -183,7 +183,7 @@ public class ControleEmprestimoProfessor extends javax.swing.JFrame {
     private void TextProfessorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TextProfessorKeyPressed
         if (evt.getKeyCode()==KeyEvent.VK_ENTER){
             
-            String h=lpm.listarProfessores(TextProfessor.getText());
+            String h=LivroProfessorManenger.listarProfessores(TextProfessor.getText());
             if(h.length()>0){
                 TextProfessor.setText(h);
             }else{

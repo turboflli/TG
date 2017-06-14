@@ -42,9 +42,14 @@ public class ControleAluno extends javax.swing.JFrame {
         ButExcluir.setVisible(false);
         ButAlterar.setVisible(false);
         a=new Aluno();
-        //System.load("E:/open/opencv/build/java/x86/opencv_java2410.dll");
+       //System.load("E:/open/opencv/build/java/x86/opencv_java2410.dll");
+        //JOptionPane.showMessageDialog(null, System.getProperty("sun.arch.data.model"));
+        if(System.getProperty("sun.arch.data.model").equals("32")){
+        System.load(System.getProperty("user.dir")+"\\opencv_java241032.dll");
+        }else if(System.getProperty("sun.arch.data.model").equals("64")){
+        System.load(System.getProperty("user.dir")+"\\opencv_java241064.dll");    
+        }
         
-        System.load(System.getProperty("user.dir")+"\\opencv_java2410.dll");
     }
 
     /**

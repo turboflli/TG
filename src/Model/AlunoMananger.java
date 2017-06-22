@@ -64,7 +64,8 @@ public class AlunoMananger {
             return todos.get(0);
         }else{
             String nomes="";
-            for(Aluno a:todos){nomes+=a.getNome()+"\n";}
+            int cont=1;
+            for(Aluno a:todos){nomes+=(cont++)+". "+a.getNome()+"\n";}
             String resp=JOptionPane.showInputDialog(null, todos.size()+" Registros encontrados\n"+nomes, "Mais de um", JOptionPane.INFORMATION_MESSAGE);
             try{
                 return todos.get(Integer.parseInt(resp)-1);

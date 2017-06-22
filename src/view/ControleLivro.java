@@ -60,6 +60,7 @@ public class ControleLivro extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Controle de Livros");
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(253, 253, 253));
         jPanel1.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(45, 46, 51), 14), javax.swing.BorderFactory.createLineBorder(new java.awt.Color(211, 217, 217), 8)));
@@ -95,6 +96,11 @@ public class ControleLivro extends javax.swing.JFrame {
         });
 
         Lista.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        Lista.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                ListaItemStateChanged(evt);
+            }
+        });
 
         ButPesquisa.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         ButPesquisa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/lupa.png"))); // NOI18N
@@ -364,6 +370,14 @@ public class ControleLivro extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_ButAlterarActionPerformed
+
+    private void ListaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ListaItemStateChanged
+        try{
+            Lista.setToolTipText(Lista.getSelectedItem().toString());
+        }catch(NullPointerException e){
+            Lista.setToolTipText("");
+        }
+    }//GEN-LAST:event_ListaItemStateChanged
 
     /**
      * @param args the command line arguments

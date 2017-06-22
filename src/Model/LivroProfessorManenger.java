@@ -81,24 +81,33 @@ public class LivroProfessorManenger {
     
     //retorna o nome completo de um professor pesquisando por um pedaço
     public static String listarProfessores(String nome){
-        String nom="";
-        int u=0;
+        ArrayList<String>todos=new ArrayList<>();
         try {
             Statement stm=con.createStatement();
             ResultSet rs=stm.executeQuery("select nome from professor where upper(nome) like upper('%"+nome+"%')");
             while(rs.next()){
-                u++;
-                nom=rs.getString("nome");
+                todos.add(rs.getString("nome"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(LivroProfessorManenger.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if(u>1){
-            JOptionPane.showMessageDialog(null, u+" Registros encontrados\n pequise por nome completo\nultimo foi selecionado", "Mais de um", JOptionPane.INFORMATION_MESSAGE);
-            return nom;
+        if(todos.size()<1){
+            return null;
+        }else if(todos.size()==1){
+            return todos.get(0);
         }else{
-            return nom;
+            String nomes="";
+            int cont=1;
+            for(String n:todos){nomes+=(cont++)+". "+n+"\n";}
+            String resp=JOptionPane.showInputDialog(null, todos.size()+" Registros encontrados\n"+nomes, "Mais de um", JOptionPane.INFORMATION_MESSAGE);
+            try{
+                return todos.get(Integer.parseInt(resp)-1);
+            }catch(IndexOutOfBoundsException e){
+            }catch(NullPointerException e){
+            }catch(NumberFormatException e){}
+            
         }
+        return todos.get(0);
     }
     
     public static void devolverLivro(LivroProfessor lp){

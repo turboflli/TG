@@ -5,14 +5,6 @@
  */
 package Model;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -25,7 +17,6 @@ public class Livro {
     private String titulo;
     private String autor;
     private String editora;
-    private Connection con=new Conexao().conectar();
     /**
      * @return the quantidade
      */

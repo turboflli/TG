@@ -5,6 +5,7 @@
  */
 package view;
 
+import Model.EmprestimoManenger;
 import Model.Emprestimos;
 import Model.GeradorRelatorios;
 import Model.LivroProfessor;
@@ -53,9 +54,11 @@ public class ControleEmprestimoProfessor extends javax.swing.JFrame {
         TextLivro1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         Lista1 = new javax.swing.JComboBox();
+        jComboBox1 = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Emprestimos de Professores");
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(253, 253, 253));
         jPanel1.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(45, 56, 51), 14), javax.swing.BorderFactory.createLineBorder(new java.awt.Color(211, 217, 217), 8)));
@@ -94,6 +97,14 @@ public class ControleEmprestimoProfessor extends javax.swing.JFrame {
         });
 
         Lista1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        Lista1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                Lista1ItemStateChanged(evt);
+            }
+        });
+
+        jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "titulo", "autor" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -108,9 +119,12 @@ public class ControleEmprestimoProfessor extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jButton1)
-                                    .addComponent(jLabel3))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(TextLivro1)
@@ -130,7 +144,9 @@ public class ControleEmprestimoProfessor extends javax.swing.JFrame {
                     .addComponent(TextProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(TextLivro1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -159,7 +175,7 @@ public class ControleEmprestimoProfessor extends javax.swing.JFrame {
        Lista1.removeAllItems();
         ArrayList<String> comp=new ArrayList<String>();
         
-        comp=e.listarTitulo(TextLivro1.getText());
+        comp=EmprestimoManenger.listar(TextLivro1.getText(),jComboBox1.getSelectedItem().toString());
         if(comp.size()>=1){
             for (String vez:comp){
                 Lista1.addItem(vez);
@@ -173,7 +189,7 @@ public class ControleEmprestimoProfessor extends javax.swing.JFrame {
         calen=new GregorianCalendar();
         
             String temp1=Lista1.getSelectedItem().toString();
-            e.descobrirLivro1(temp1.split("¬")[0], temp1.split("¬")[1]);
+            e.setLivro1(EmprestimoManenger.descobrirLivro(temp1.split("¬")[0], temp1.split("¬")[1]));
             LivroProfessor lp=new LivroProfessor();
             lp.setLiv(e.getLivro1());
             lp.setProf(LivroProfessorManenger.descobrirProfessor(TextProfessor.getText()));
@@ -195,6 +211,15 @@ public class ControleEmprestimoProfessor extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_TextProfessorKeyPressed
+
+    private void Lista1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_Lista1ItemStateChanged
+         try{
+            Lista1.setToolTipText(Lista1.getSelectedItem().toString());
+        }catch(NullPointerException e){
+            Lista1.setToolTipText("");
+        }
+        
+    }//GEN-LAST:event_Lista1ItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -237,6 +262,7 @@ public class ControleEmprestimoProfessor extends javax.swing.JFrame {
     private javax.swing.JTextField TextProfessor;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
+    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;

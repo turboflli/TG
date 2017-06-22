@@ -23,6 +23,8 @@ public class Menu extends javax.swing.JFrame {
      */
     public Menu() {
         initComponents();
+        
+        
         new Thread(new Runnable() {
         public void run() {
             cont=EmprestimoManenger.contar();
@@ -48,6 +50,7 @@ public class Menu extends javax.swing.JFrame {
             
             }
         calen=null;
+
     }
 
     /**
@@ -375,6 +378,15 @@ public class Menu extends javax.swing.JFrame {
         cont--;
         lcont.setText("Emprestimos previstos para hoje: "+Integer.toString(cont));
     }
+    public static void setnomes(String h){
+        String ht="<html>";
+        for (String vez:h.split(";")){
+            ht+="<p>"+vez+"</p><br>";
+        }
+        ht+="</html>";
+        lcont.setToolTipText(ht);
+    }
+    
     public static void setMax(int max){
         jProgressBar1.setMaximum(max);
         jProgressBar1.setValue(0);

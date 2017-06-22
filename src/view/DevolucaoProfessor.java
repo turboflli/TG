@@ -23,7 +23,9 @@ public class DevolucaoProfessor extends javax.swing.JFrame {
      */
     public DevolucaoProfessor() {
         initComponents();
-        
+        BoundsPopupMenuListener listener =
+        new BoundsPopupMenuListener();
+        jComboBox1.addPopupMenuListener( listener );
     }
 
     /**
@@ -43,6 +45,7 @@ public class DevolucaoProfessor extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Devolução de Professores");
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(253, 253, 253));
         jPanel1.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(45, 56, 51), 14), javax.swing.BorderFactory.createLineBorder(new java.awt.Color(211, 217, 217), 8)));
@@ -58,6 +61,11 @@ public class DevolucaoProfessor extends javax.swing.JFrame {
         });
 
         jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox1ItemStateChanged(evt);
+            }
+        });
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton1.setText("Devolver");
@@ -139,6 +147,14 @@ public class DevolucaoProfessor extends javax.swing.JFrame {
        LivroProfessorManenger.devolverLivro(lp);
        jComboBox1.removeAllItems();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+         try{
+            jComboBox1.setToolTipText(jComboBox1.getSelectedItem().toString());
+        }catch(NullPointerException e){
+            jComboBox1.setToolTipText("");
+        }
+    }//GEN-LAST:event_jComboBox1ItemStateChanged
 
     /**
      * @param args the command line arguments

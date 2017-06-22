@@ -5,6 +5,7 @@
  */
 package view;
 
+import Model.Aluno;
 import Model.EmprestimoManenger;
 import Model.Emprestimos;
 import java.awt.event.KeyEvent;
@@ -74,6 +75,7 @@ public class ControleDevolucao extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Devolução de Alunos");
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(253, 253, 253));
         jPanel1.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(45, 46, 51), 14), javax.swing.BorderFactory.createLineBorder(new java.awt.Color(211, 217, 217), 8)));
@@ -241,9 +243,10 @@ public class ControleDevolucao extends javax.swing.JFrame {
 
     private void TextNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TextNomeKeyPressed
         if (evt.getKeyCode()==KeyEvent.VK_ENTER){
-            String h=e.descobrirAluno(TextNome.getText());
-            if(h.length()>0){
-                TextNome.setText(h);
+            Aluno a=EmprestimoManenger.descobrirAluno(TextNome.getText());
+            if(a!=null){
+                TextNome.setText(a.getNome());
+                e.setAluno(a.getId());
                 listaEmprestimos=EmprestimoManenger.returnaTodos(TextNome.getText());
                 jComboBox1.removeAllItems();
                 for(int u=0;u<listaEmprestimos.size();u++){
@@ -346,6 +349,12 @@ public class ControleDevolucao extends javax.swing.JFrame {
         if(escolhido.getPendentes()==0 && 
                 escolhido.getDataDevolucao().equals(formato.format(calen.getTime()).replace("/", ""))){
             Menu.menos1();
+            new Thread(new Runnable() {
+            public void run() {
+                EmprestimoManenger.contar();
+            }
+            }).start();
+            
         }
         listaEmprestimos.set(jComboBox1.getSelectedIndex(), escolhido);
     }//GEN-LAST:event_ButLivro1ActionPerformed
@@ -359,6 +368,11 @@ public class ControleDevolucao extends javax.swing.JFrame {
         if(escolhido.getPendentes()==0 && 
                 escolhido.getDataDevolucao().equals(formato.format(calen.getTime()).replace("/", ""))){
             Menu.menos1();
+            new Thread(new Runnable() {
+            public void run() {
+                EmprestimoManenger.contar();
+            }
+            }).start();
         }
         listaEmprestimos.set(jComboBox1.getSelectedIndex(), escolhido);
     }//GEN-LAST:event_ButLivro2ActionPerformed

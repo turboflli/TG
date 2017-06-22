@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -34,14 +35,14 @@ public class AlunoMananger {
     
     public static Aluno consultarPorNome(String nome){
         Statement stm;
-        int u=0;
-        Aluno a=new Aluno();
+        
+        ArrayList<Aluno> todos=new ArrayList<Aluno>();
         try {
             stm = con.createStatement();
             ResultSet rs=stm.executeQuery("select * from aluno where upper(nome) like upper('%"+nome+"%')");
             
             while(rs.next()){
-                u++;
+                Aluno a=new Aluno();
                 a.setId(rs.getInt("id"));
                 a.setNome(rs.getString("nome"));
                 a.setRg(rs.getString("rg"));
@@ -51,19 +52,28 @@ public class AlunoMananger {
                 a.setCurso(rs.getString("curso"));
                 a.setSemestre(rs.getInt("semestre"));
                 a.setPeriodo(rs.getInt("periodo"));
+                todos.add(a);
             }
         } catch (SQLException ex) {
             Logger.getLogger(Aluno.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        if(u==0){
+        if(todos.size()==0){
             return null;
-        }else if(u==1){
-
+        }else if(todos.size()==1){
+            return todos.get(0);
         }else{
-            JOptionPane.showMessageDialog(null, u+" Registros encontrados\n pequise por outro campo", "Mais de um", JOptionPane.INFORMATION_MESSAGE);
+            String nomes="";
+            for(Aluno a:todos){nomes+=a.getNome()+"\n";}
+            String resp=JOptionPane.showInputDialog(null, todos.size()+" Registros encontrados\n"+nomes, "Mais de um", JOptionPane.INFORMATION_MESSAGE);
+            try{
+                return todos.get(Integer.parseInt(resp)-1);
+            }catch(IndexOutOfBoundsException e){
+            }catch(NullPointerException e){
+            }catch(NumberFormatException e){}
+            
         }
-        return a;
+        return todos.get(0);
     }
     
     public static void deletar(Aluno a){

@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -48,25 +49,36 @@ public class ProfessorManenger {
     }
     
     public static Professor consultar(String name){
-        Professor p=new Professor();
+        
         Statement stm;
-        int u=0;
+        ArrayList<Professor> todos=new ArrayList<>();
          try {
              stm = con.createStatement();
              ResultSet rs=stm.executeQuery("select * from professor where upper(nome) like upper('%"+name+"%')");
              while(rs.next()){
+                 Professor p=new Professor();
                  p.setId(rs.getInt("id"));
                  p.setNome(rs.getString("nome"));
-                 u++;
+                 todos.add(p);
              }
          } catch (SQLException ex) {
              Logger.getLogger(ProfessorManenger.class.getName()).log(Level.SEVERE, null, ex);
          }
-        if(u==0){
-            JOptionPane.showMessageDialog(null,"nenhum professor encontrado","Vazio",JOptionPane.ERROR_MESSAGE);
-        }else if(u>1){
-            JOptionPane.showMessageDialog(null,u+" Registro foram encontrados\n pesquise por nome mais completo\nultimo foi selecionado","Vario",JOptionPane.INFORMATION_MESSAGE);
+        if(todos.size()==0){
+            return null;
+        }else if(todos.size()==1){
+            return todos.get(0);
+        }else{
+            String nomes="";
+            for(Professor p:todos){nomes+=p.getNome()+"\n";}
+            String resp=JOptionPane.showInputDialog(null, todos.size()+" Registros encontrados\n"+nomes, "Mais de um", JOptionPane.INFORMATION_MESSAGE);
+            try{
+                return todos.get(Integer.parseInt(resp)-1);
+            }catch(IndexOutOfBoundsException e){
+            }catch(NullPointerException e){
+            }catch(NumberFormatException e){}
+            
         }
-        return p;
+        return todos.get(0);
     }
 }

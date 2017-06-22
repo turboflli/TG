@@ -39,6 +39,10 @@ public class ControleReserva extends javax.swing.JFrame {
         calen.add(Calendar.DAY_OF_YEAR, 7);
         data=calen.getTime();
         TextDataD.setText(formato.format(data).replace("/", ""));
+         BoundsPopupMenuListener listener =
+        new BoundsPopupMenuListener();
+        Lista1.addPopupMenuListener( listener );
+        Lista2.addPopupMenuListener( listener );
     }
 
     /**
@@ -160,7 +164,7 @@ public class ControleReserva extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jButton1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Lista1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(Lista1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jButton2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)

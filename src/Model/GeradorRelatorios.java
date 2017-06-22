@@ -438,7 +438,8 @@ public class GeradorRelatorios extends Thread{
             cell2 = new PdfPCell(new Paragraph(rs.getString("liv1")+"¬"+rs.getString("autor1")));
             cell3 = new PdfPCell(new Paragraph(rs.getString("liv2")+"¬"+rs.getString("autor2")));
             data=rs.getString("dr");
-            data=data.substring(0, 2)+"/"+data.substring(2,4)+"/"+data.substring(4);
+            //data=data.substring(0, 2)+"/"+data.substring(2,4)+"/"+data.substring(4);
+            data=data.substring(6, 8)+"/"+data.substring(4,6)+"/"+data.substring(0,4);
             cell4 = new PdfPCell(new Paragraph(data));
             data=rs.getString("dd");
             data=data.substring(0, 2)+"/"+data.substring(2,4)+"/"+data.substring(4);

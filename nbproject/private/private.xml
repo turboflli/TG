@@ -3,13 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Lucas/Documents/NetBeansProjects/TGBiblioteca/src/Model/LivroProfessorManenger.java</file>
-            <file>file:/C:/Users/Lucas/Documents/NetBeansProjects/TGBiblioteca/src/view/ControleAluno.java</file>
-            <file>file:/C:/Users/Lucas/Documents/NetBeansProjects/TGBiblioteca/src/Model/Emprestimos.java</file>
-            <file>file:/C:/Users/Lucas/Documents/NetBeansProjects/TGBiblioteca/src/Model/EmprestimoManenger.java</file>
+            <file>file:/C:/Users/Lucas/Documents/NetBeansProjects/TGBiblioteca/src/view/ControleEmprestimos.java</file>
+            <file>file:/C:/Users/Lucas/Documents/NetBeansProjects/TGBiblioteca/src/view/BoundsPopupMenuListener.java</file>
             <file>file:/C:/Users/Lucas/Documents/NetBeansProjects/TGBiblioteca/src/view/ControleEmprestimoProfessor.java</file>
-            <file>file:/C:/Users/Lucas/Documents/NetBeansProjects/TGBiblioteca/src/Model/LivroProfessor.java</file>
-            <file>file:/C:/Users/Lucas/Documents/NetBeansProjects/TGBiblioteca/src/view/DevolucaoProfessor.java</file>
         </group>
     </open-files>
 </project-private>

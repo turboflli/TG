@@ -1,6 +1,6 @@
 package view;
 
-import Model.EmprestimoManenger;
+import Model.EmprestimoManager;
 import Model.GeradorRelatorios;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
  * @author Lucas
  */
 public class Menu extends javax.swing.JFrame {
-    private static int cont=0;
+    
     /**
      * Creates new form Menu
      */
@@ -27,8 +27,8 @@ public class Menu extends javax.swing.JFrame {
         
         new Thread(new Runnable() {
         public void run() {
-            cont=EmprestimoManenger.contar();
-            lcont.setText("Emprestimos previstos para hoje: "+Integer.toString(cont));
+            EmprestimoManager.contar();
+            lcont.setText("Emprestimos previstos para hoje");
         }
         }).start();
         GregorianCalendar calen=new GregorianCalendar();
@@ -37,14 +37,14 @@ public class Menu extends javax.swing.JFrame {
         String data=formato.format(calen.getTime());
         new Thread(new Runnable() {
         public void run() {
-            EmprestimoManenger.killreserva(data);
+            EmprestimoManager.killreserva(data);
         }
         }).start();
         int resp=JOptionPane.showConfirmDialog(null, "Acrescentar 1 no valor das multas de emprestimos com livros não devolvidos ?", "atualizar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if(resp==JOptionPane.YES_OPTION){
             new Thread(new Runnable() {
             public void run() {
-                EmprestimoManenger.atualizarMulta(data);
+                EmprestimoManager.atualizarMulta(data);
             }
             }).start();
             
@@ -374,10 +374,7 @@ public class Menu extends javax.swing.JFrame {
 
     
     
-    public static void menos1(){
-        cont--;
-        lcont.setText("Emprestimos previstos para hoje: "+Integer.toString(cont));
-    }
+    
     public static void setnomes(String h){
         String ht="<html>";
         for (String vez:h.split(";")){

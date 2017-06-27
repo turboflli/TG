@@ -10,36 +10,36 @@ package Model;
  * @author Lucas
  */
 public class LivroProfessor {
-    private int prof,liv;
+    private int professorId,livroId;
     private String data;
     private boolean devlvido=false;
 
     /**
      * @return the prof
      */
-    public int getProf() {
-        return prof;
+    public int getProfessorId() {
+        return professorId;
     }
 
     /**
-     * @param prof the prof to set
+     * @param professorId the prof to set
      */
-    public void setProf(int prof) {
-        this.prof = prof;
+    public void setProfessorId(int professorId) {
+        this.professorId = professorId;
     }
 
     /**
      * @return the liv
      */
-    public int getLiv() {
-        return liv;
+    public int getLivroId() {
+        return livroId;
     }
 
     /**
-     * @param liv the liv to set
+     * @param livroId the liv to set
      */
-    public void setLiv(int liv) {
-        this.liv = liv;
+    public void setLivroId(int livroId) {
+        this.livroId = livroId;
     }
 
     /**

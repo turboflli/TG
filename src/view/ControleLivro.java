@@ -5,8 +5,9 @@
  */
 package view;
 
+import Model.EmprestimoManager;
 import Model.Livro;
-import Model.LivroMananger;
+import Model.LivroManager;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -278,13 +279,13 @@ public class ControleLivro extends javax.swing.JFrame {
         l.setEditora(TextEditora.getText());
         l.setQuantidade(Integer.parseInt(TextQuantidade.getText()));
         l.setEdicao(Integer.parseInt(TextEdicao.getText()));
-        LivroMananger.cadastrar(l);
+        LivroManager.cadastrar(l);
     }//GEN-LAST:event_ButGravarActionPerformed
 
     private void ButListaTituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButListaTituloActionPerformed
         ArrayList<String> comp=new ArrayList<String>();
         Lista.removeAllItems();
-        comp=LivroMananger.listarTitulo(TextTitulo.getText());
+        comp=EmprestimoManager.listar(TextTitulo.getText(),"titulo");
          if(comp.size()>=1){
             for (String vez:comp){
                 Lista.addItem(vez);
@@ -297,7 +298,7 @@ public class ControleLivro extends javax.swing.JFrame {
     private void ButListaAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButListaAutorActionPerformed
         ArrayList<String> comp=new ArrayList<String>();
         Lista.removeAllItems();
-        comp=LivroMananger.listarAutor(TextAutor.getText());
+        comp=EmprestimoManager.listar(TextAutor.getText(),"autor");
         if(comp.size()>=1){
             for (String vez:comp){
                 Lista.addItem(vez);
@@ -309,7 +310,7 @@ public class ControleLivro extends javax.swing.JFrame {
 
     private void ButPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButPesquisaActionPerformed
         String temp=Lista.getSelectedItem().toString();
-        l=LivroMananger.pesquisar(temp.split("¬")[0], temp.split("¬")[1]);
+        l=LivroManager.pesquisar(temp.split("¬")[0], temp.split("¬")[1]);
         TextTitulo.setText(l.getTitulo());
         TextAutor.setText(l.getAutor());
         TextEditora.setText(l.getEditora());
@@ -334,7 +335,7 @@ public class ControleLivro extends javax.swing.JFrame {
             
             String respost=JOptionPane.showInputDialog(null, "Escreva 'deletar' \nignorar maiusculo e minusculo", "Confirmação", JOptionPane.QUESTION_MESSAGE);
             if(respost.equalsIgnoreCase("deletar")){
-                LivroMananger.deletar(l);
+                LivroManager.deletar(l);
                 l=new Livro();
                 TextTitulo.setText("");
                 TextAutor.setText("");
@@ -358,7 +359,7 @@ public class ControleLivro extends javax.swing.JFrame {
                 l.setEditora(TextEditora.getText());
                 l.setQuantidade(Integer.parseInt(TextQuantidade.getText()));
                 l.setEdicao(Integer.parseInt(TextEdicao.getText()));
-                LivroMananger.atualizar(l);
+                LivroManager.atualizar(l);
                 l=new Livro();
                 TextTitulo.setText("");
                 TextAutor.setText("");

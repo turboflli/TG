@@ -5,11 +5,11 @@
  */
 package view;
 
-import Model.EmprestimoManenger;
+import Model.EmprestimoManager;
 import Model.Emprestimos;
 import Model.GeradorRelatorios;
 import Model.LivroProfessor;
-import Model.LivroProfessorManenger;
+import Model.LivroProfessorManager;
 import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -175,7 +175,7 @@ public class ControleEmprestimoProfessor extends javax.swing.JFrame {
        Lista1.removeAllItems();
         ArrayList<String> comp=new ArrayList<String>();
         
-        comp=EmprestimoManenger.listar(TextLivro1.getText(),jComboBox1.getSelectedItem().toString());
+        comp=EmprestimoManager.listar(TextLivro1.getText(),jComboBox1.getSelectedItem().toString());
         if(comp.size()>=1){
             for (String vez:comp){
                 Lista1.addItem(vez);
@@ -189,12 +189,12 @@ public class ControleEmprestimoProfessor extends javax.swing.JFrame {
         calen=new GregorianCalendar();
         
             String temp1=Lista1.getSelectedItem().toString();
-            e.setLivro1(EmprestimoManenger.descobrirLivro(temp1.split("¬")[0], temp1.split("¬")[1]));
+            e.setLivro1(EmprestimoManager.descobrirLivro(temp1.split("¬")[0], temp1.split("¬")[1]));
             LivroProfessor lp=new LivroProfessor();
-            lp.setLiv(e.getLivro1());
-            lp.setProf(LivroProfessorManenger.descobrirProfessor(TextProfessor.getText()));
+            lp.setLivroId(e.getLivro1());
+            lp.setProfessorId(LivroProfessorManager.descobrirProfessor(TextProfessor.getText()));
             lp.setData(formato.format(calen.getTime()).replace("/", ""));
-            LivroProfessorManenger.cadastrar(lp);
+            LivroProfessorManager.cadastrar(lp);
             Lista1.removeAllItems();
         
 
@@ -203,7 +203,7 @@ public class ControleEmprestimoProfessor extends javax.swing.JFrame {
     private void TextProfessorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TextProfessorKeyPressed
         if (evt.getKeyCode()==KeyEvent.VK_ENTER){
             
-            String h=LivroProfessorManenger.listarProfessores(TextProfessor.getText());
+            String h=LivroProfessorManager.listarProfessores(TextProfessor.getText());
             if(h.length()>0){
                 TextProfessor.setText(h);
             }else{

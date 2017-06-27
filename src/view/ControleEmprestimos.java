@@ -2,7 +2,8 @@
 package view;
 
 import Model.Aluno;
-import Model.EmprestimoManenger;
+import Model.AlunoManager;
+import Model.EmprestimoManager;
 import Model.Emprestimos;
 import java.awt.Component;
 import java.awt.Container;
@@ -298,7 +299,7 @@ public class ControleEmprestimos extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        ArrayList<String> comp=new ArrayList<String>();
        Lista1.removeAllItems();
-       comp=EmprestimoManenger.listar(TextLivro1.getText(),jComboBox1.getSelectedItem().toString());
+       comp=EmprestimoManager.listar(TextLivro1.getText(),jComboBox1.getSelectedItem().toString());
        if(comp.size()>=1){
             for (String vez:comp){
                 Lista1.addItem(vez);
@@ -315,7 +316,7 @@ public class ControleEmprestimos extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         ArrayList<String> comp=new ArrayList<String>();
         Lista2.removeAllItems();
-       comp=EmprestimoManenger.listar(TextLivro1.getText(),jComboBox1.getSelectedItem().toString());
+       comp=EmprestimoManager.listar(TextLivro1.getText(),jComboBox1.getSelectedItem().toString());
        if(comp.size()>=1){
             for (String vez:comp){
                 Lista2.addItem(vez);
@@ -327,7 +328,7 @@ public class ControleEmprestimos extends javax.swing.JFrame {
 
     private void TextAlunoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TextAlunoKeyPressed
         if (evt.getKeyCode()==KeyEvent.VK_ENTER){
-            Aluno a=EmprestimoManenger.descobrirAluno(TextAluno.getText());
+            Aluno a=AlunoManager.consultar(TextAluno.getText(),"nome");
             if(a!=null){
                 TextAluno.setText(a.getNome());
                 e.setAluno(a.getId());
@@ -341,18 +342,18 @@ public class ControleEmprestimos extends javax.swing.JFrame {
         calen=new GregorianCalendar();
         try {
             String temp1=Lista1.getSelectedItem().toString();
-            e.setLivro1(EmprestimoManenger.descobrirLivro(temp1.split("¬")[0], temp1.split("¬")[1]));
+            e.setLivro1(EmprestimoManager.descobrirLivro(temp1.split("¬")[0], temp1.split("¬")[1]));
             e.setDatarealizacao(formato.format(calen.getTime()).replace("/", ""));
             calen.setTime(formato.parse(TextDataD.getText()));
             e.setDataDevolucao(formato.format(calen.getTime()).replace("/", ""));
             if(Lista2.getItemCount()>0){
                 String temp2=Lista2.getSelectedItem().toString();
-                e.setLivro2(EmprestimoManenger.descobrirLivro(temp2.split("¬")[0], temp2.split("¬")[1]));
-                EmprestimoManenger.cadastrar(3,e);
+                e.setLivro2(EmprestimoManager.descobrirLivro(temp2.split("¬")[0], temp2.split("¬")[1]));
+                EmprestimoManager.cadastrar(3,e);
                 Lista1.removeAllItems();
                 Lista2.removeAllItems();
             }else{
-                EmprestimoManenger.cadastrar(1,e);
+                EmprestimoManager.cadastrar(1,e);
                 Lista1.removeAllItems();
             }
         } catch (ParseException ex) {

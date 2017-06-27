@@ -11,7 +11,7 @@ import java.sql.SQLException;
 
 
 public class Conexao {
-    private Connection con;
+    private static Connection con;
     public Connection conectar(){
         String maq="localhost",nome_db="TGBiblioteca",user="root",senha="Lucas00";
         if(con==null){

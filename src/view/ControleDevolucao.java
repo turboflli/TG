@@ -6,7 +6,8 @@
 package view;
 
 import Model.Aluno;
-import Model.EmprestimoManenger;
+import Model.AlunoManager;
+import Model.EmprestimoManager;
 import Model.Emprestimos;
 import java.awt.event.KeyEvent;
 import java.text.ParseException;
@@ -243,11 +244,11 @@ public class ControleDevolucao extends javax.swing.JFrame {
 
     private void TextNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TextNomeKeyPressed
         if (evt.getKeyCode()==KeyEvent.VK_ENTER){
-            Aluno a=EmprestimoManenger.descobrirAluno(TextNome.getText());
+            Aluno a=AlunoManager.consultar(TextNome.getText(),"nome");
             if(a!=null){
                 TextNome.setText(a.getNome());
                 e.setAluno(a.getId());
-                listaEmprestimos=EmprestimoManenger.returnaTodos(TextNome.getText());
+                listaEmprestimos=EmprestimoManager.returnaTodos(TextNome.getText());
                 jComboBox1.removeAllItems();
                 for(int u=0;u<listaEmprestimos.size();u++){
                  jComboBox1.addItem(listaEmprestimos.get(u).getId());
@@ -265,20 +266,20 @@ public class ControleDevolucao extends javax.swing.JFrame {
             
             Emprestimos escolhido=listaEmprestimos.get(jComboBox1.getSelectedIndex());
             if(escolhido.getPendentes()==3 ){
-                lLivro1.setText(EmprestimoManenger.getLivro(escolhido.getLivro1()));
-                lLivro2.setText(EmprestimoManenger.getLivro(escolhido.getLivro2()));
+                lLivro1.setText(EmprestimoManager.getLivro(escolhido.getLivro1()));
+                lLivro2.setText(EmprestimoManager.getLivro(escolhido.getLivro2()));
                 lLivro1.setVisible(true);
                 lLivro2.setVisible(true);
                 ButLivro1.setVisible(true);
                 ButLivro2.setVisible(true);
             }else if(escolhido.getPendentes()==1){
-                lLivro1.setText(EmprestimoManenger.getLivro(escolhido.getLivro1()));
+                lLivro1.setText(EmprestimoManager.getLivro(escolhido.getLivro1()));
                 lLivro1.setVisible(true);
                 ButLivro1.setVisible(true);
                 lLivro2.setVisible(false);
                 ButLivro2.setVisible(false);
             }else if(escolhido.getPendentes()==2){
-                lLivro2.setText(EmprestimoManenger.getLivro(escolhido.getLivro2()));
+                lLivro2.setText(EmprestimoManager.getLivro(escolhido.getLivro2()));
                 lLivro2.setVisible(true);
                 ButLivro2.setVisible(true);
                 lLivro1.setVisible(false);
@@ -341,17 +342,16 @@ public class ControleDevolucao extends javax.swing.JFrame {
 
     private void ButLivro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButLivro1ActionPerformed
         Emprestimos escolhido=listaEmprestimos.get(jComboBox1.getSelectedIndex());
-        EmprestimoManenger.devolver1(escolhido);
+        EmprestimoManager.devolver(escolhido,EmprestimoManager.Livro1Pendente);
         ButLivro1.setVisible(false);
         lLivro1.setVisible(false);
         escolhido.setPendentes(escolhido.getPendentes()-1);
         calen=new GregorianCalendar();
         if(escolhido.getPendentes()==0 && 
                 escolhido.getDataDevolucao().equals(formato.format(calen.getTime()).replace("/", ""))){
-            Menu.menos1();
             new Thread(new Runnable() {
             public void run() {
-                EmprestimoManenger.contar();
+                EmprestimoManager.contar();
             }
             }).start();
             
@@ -361,16 +361,15 @@ public class ControleDevolucao extends javax.swing.JFrame {
 
     private void ButLivro2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButLivro2ActionPerformed
         Emprestimos escolhido=listaEmprestimos.get(jComboBox1.getSelectedIndex());
-        EmprestimoManenger.devolver2(escolhido);
+        EmprestimoManager.devolver(escolhido,EmprestimoManager.Livro2Pendente);
         ButLivro2.setVisible(false);
         lLivro2.setVisible(false);
         escolhido.setPendentes(escolhido.getPendentes()-2);
         if(escolhido.getPendentes()==0 && 
                 escolhido.getDataDevolucao().equals(formato.format(calen.getTime()).replace("/", ""))){
-            Menu.menos1();
             new Thread(new Runnable() {
             public void run() {
-                EmprestimoManenger.contar();
+                EmprestimoManager.contar();
             }
             }).start();
         }
@@ -382,7 +381,7 @@ public class ControleDevolucao extends javax.swing.JFrame {
         escolhido.setMulta(Integer.parseInt(TextMulta.getText()));
         calen= new GregorianCalendar();
         escolhido.setDataPagamento(formato.format(calen.getTime()).replace("/", ""));
-        if(EmprestimoManenger.pagar(escolhido)){
+        if(EmprestimoManager.pagar(escolhido)){
             jLabel2.setVisible(false);
             TextMulta.setVisible(false);
             ButPagar.setVisible(false);
@@ -401,7 +400,11 @@ public class ControleDevolucao extends javax.swing.JFrame {
          }
          String h=escolhido.getDataDevolucao();
          if(escolhido.getDataDevolucao().equals(formato.format(calen.getTime()).replace("/", ""))){
-            Menu.menos1();
+             new Thread(new Runnable() {
+            public void run() {
+                EmprestimoManager.contar();
+            }
+            }).start();
         }
          h=h.substring(0, 2)+"/"+h.substring(2, 4)+"/"+h.substring(4);
         try {
@@ -413,7 +416,7 @@ public class ControleDevolucao extends javax.swing.JFrame {
          h=formato.format(calen.getTime());
          lDevolucao.setText(h);
          escolhido.setDataDevolucao(h.replace("/",""));
-         EmprestimoManenger.adiar(escolhido);
+         EmprestimoManager.adiar(escolhido);
         listaEmprestimos.set(jComboBox1.getSelectedIndex(), escolhido);
         
     }//GEN-LAST:event_ButAdiarActionPerformed
@@ -455,35 +458,7 @@ public class ControleDevolucao extends javax.swing.JFrame {
 
     
     
-    /*private void multar(){
-        jLabel2.setVisible(true);
-        TextMulta.setVisible(true);
-        ButPagar.setVisible(true);
-        int days=0;
-        Date tempo;
-            Date hoje;
-            try {
-                tempo = formato.parse(lDevolucao.getText());
-                hoje=calen.getTime();
-                String temp=formato.format(hoje);
-                hoje=formato.parse(temp);
-                while(hoje.compareTo(tempo)==1){
-                    calen.setTime(tempo);
-                    calen.add(Calendar.DAY_OF_YEAR, 1);
-                    tempo=calen.getTime();
-                    if(tempo.getDay()!=0 && tempo.getDay()!=6){days++;}//exclui sabados e domingos
-                }
-                
-                if(days>9){
-                    TextMulta.setText(Integer.toString(days));
-                }else{
-                    TextMulta.setText("0"+Integer.toString(days));
-                }
-            } catch (ParseException ex) {
-                Logger.getLogger(ControleDevolucao.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        
-    }*/
+    
     
     
     

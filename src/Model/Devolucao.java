@@ -11,8 +11,11 @@ package Model;
  */
 public class Devolucao {
     private int id,aluno,livro1,livro2,multa;
-    private String data1,data2;
-
+    private String dataRealizacao,dataFinal;
+    
+    
+    public Devolucao(){}
+    
     /**
      * @return the id
      */
@@ -86,29 +89,29 @@ public class Devolucao {
     /**
      * @return the data1
      */
-    public String getData1() {
-        return data1;
+    public String getDataRealizacao() {
+        return dataRealizacao;
     }
 
     /**
-     * @param data1 the data1 to set
+     * @param dataRealizacao the data1 to set
      */
-    public void setData1(String data1) {
-        this.data1 = data1;
+    public void setDataRealizacao(String dataRealizacao) {
+        this.dataRealizacao = dataRealizacao;
     }
 
     /**
      * @return the data2
      */
-    public String getData2() {
-        return data2;
+    public String getDataFinal() {
+        return dataFinal;
     }
 
     /**
-     * @param data2 the data2 to set
+     * @param dataFinal the data2 to set
      */
-    public void setData2(String data2) {
-        this.data2 = data2;
+    public void setDataFinal(String dataFinal) {
+        this.dataFinal = dataFinal;
     }
     
 }

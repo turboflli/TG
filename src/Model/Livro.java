@@ -100,4 +100,15 @@ public class Livro {
     public void setId(int id) {
         this.id = id;
     }
+    public Livro(){}
+    public Livro(int id, String titulo, String autor, String editora, int quantidade, int edicao) {
+        this.id = id;
+        this.quantidade = quantidade;
+        this.edicao = edicao;
+        this.titulo = titulo;
+        this.autor = autor;
+        this.editora = editora;
+    }
+    
+    
 }

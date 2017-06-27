@@ -6,7 +6,7 @@
 package view;
 
 import Model.Professor;
-import Model.ProfessorManenger;
+import Model.ProfessorManager;
 import javax.swing.JOptionPane;
 
 /**
@@ -151,11 +151,11 @@ public class ControleProfessor extends javax.swing.JFrame {
     private void ButCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButCadastroActionPerformed
         
         p.setNome(TextNome.getText());
-        ProfessorManenger.cadastrar(p);
+        ProfessorManager.cadastrar(p);
     }//GEN-LAST:event_ButCadastroActionPerformed
 
     private void ButPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButPesquisarActionPerformed
-        p=ProfessorManenger.consultar(TextNome.getText());
+        p=ProfessorManager.consultar(TextNome.getText());
         if(p.getNome()!=null){
             TextNome.setText(p.getNome());
             ButAlterar.setVisible(true);
@@ -170,7 +170,7 @@ public class ControleProfessor extends javax.swing.JFrame {
             
             String respost=JOptionPane.showInputDialog(null, "Escreva 'deletar' \nignorar maiusculo e minusculo", "Confirmação", JOptionPane.QUESTION_MESSAGE);
             if(respost.equalsIgnoreCase("deletar")){
-        ProfessorManenger.Excluir(p);
+        ProfessorManager.Excluir(p);
         ButAlterar.setVisible(false);
         ButExcluir.setVisible(false);
             }}
@@ -183,7 +183,7 @@ public class ControleProfessor extends javax.swing.JFrame {
             String respost=JOptionPane.showInputDialog(null, "Escreva 'sim' \nignorar maiusculo e minusculo", "Confirmação", JOptionPane.QUESTION_MESSAGE);
             if(respost.equalsIgnoreCase("sim")){
         p.setNome(TextNome.getText());
-        ProfessorManenger.Alterar(p);
+        ProfessorManager.Alterar(p);
         ButAlterar.setVisible(false);
         ButExcluir.setVisible(false);
             }}

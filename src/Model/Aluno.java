@@ -11,9 +11,22 @@ package Model;
  * @author Lucas
  */
 public class Aluno {
-    private String nome,rg,email,ra,telefone,curso;
+    private String nome,rg,ra,email,telefone,curso;
     private int id,semestre,periodo;
     
+public Aluno(int id,String nome, String rg, String ra, String email, String telefone, String curso,  int semestre, int periodo) {
+        this.id = id;    
+        this.nome = nome;
+        this.rg = rg;
+        this.ra = ra;
+        this.email = email;
+        this.telefone = telefone;
+        this.curso = curso;
+        this.semestre = semestre;
+        this.periodo = periodo;
+    }
+    
+    public Aluno(){}
 
     /**
      * @return the nome
@@ -84,9 +97,8 @@ public class Aluno {
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
-    
-    
 
+    
     /**
      * @return the curso
      */

@@ -15,8 +15,19 @@ public class Emprestimos {
     private int id,aluno,livro1,livro2,pendentes,multa;
     private String datarealizacao,dataDevolucao,dataPagamento;
 
-    
+    public Emprestimos(){}
 
+    public Emprestimos(int id, int aluno, int livro1, int livro2, int pendentes,  String datarealizacao, String dataDevolucao, int multa) {
+        this.id = id;
+        this.aluno = aluno;
+        this.livro1 = livro1;
+        this.livro2 = livro2;
+        this.pendentes = pendentes;
+        this.multa = multa;
+        this.datarealizacao = datarealizacao;
+        this.dataDevolucao = dataDevolucao;
+    }
+    
     /**
      * @return the aluno
      */

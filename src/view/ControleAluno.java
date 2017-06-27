@@ -1,7 +1,7 @@
 package view;
 
 import Model.Aluno;
-import Model.AlunoMananger;
+import Model.AlunoManager;
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.MultiFormatReader;
 import com.google.zxing.NotFoundException;
@@ -321,7 +321,7 @@ public class ControleAluno extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ButPesquisarNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButPesquisarNActionPerformed
-        a=AlunoMananger.consultarPorNome(TextNome.getText());
+        a=AlunoManager.consultar(TextNome.getText(),"nome");
         if(a!=null) {
             TextNome.setText(a.getNome());
             TextRG.setText(a.getRg());
@@ -382,11 +382,11 @@ public class ControleAluno extends javax.swing.JFrame {
        a.setCurso(TextCurso.getText());
        a.setSemestre(Integer.parseInt(TextSemestre.getText()));
        a.setPeriodo(ComboPeriodo.getSelectedIndex()+1);
-       AlunoMananger.cadastrar(a);
+       AlunoManager.cadastrar(a);
     }//GEN-LAST:event_ButGravarActionPerformed
 
     private void ButPesquisarRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButPesquisarRActionPerformed
-        a=AlunoMananger.consultarPorRa(TextRal.getText().replace(".", ""));
+        a=AlunoManager.consultar(TextRal.getText().replace(".", ""),"ra");
         if(a!=null ) {
             TextRG.setText(a.getRg());
             TextNome.setText((a.getNome()));
@@ -412,7 +412,7 @@ public class ControleAluno extends javax.swing.JFrame {
             
             String respost=JOptionPane.showInputDialog(null, "Escreva 'deletar' \nignorar maiusculo e minusculo", "Confirmação", JOptionPane.QUESTION_MESSAGE);
             if(respost.equalsIgnoreCase("deletar")){
-                AlunoMananger.deletar(a);
+                AlunoManager.deletar(a);
                 a=new Aluno();
                 TextNome.setText("");
                 TextRG.setText("");
@@ -441,7 +441,7 @@ public class ControleAluno extends javax.swing.JFrame {
                 a.setCurso(TextCurso.getText());
                 a.setSemestre(Integer.parseInt(TextSemestre.getText()));
                 a.setPeriodo(ComboPeriodo.getSelectedIndex()+1);
-                AlunoMananger.atualizar(a);
+                AlunoManager.atualizar(a);
                 a=new Aluno();
                 TextNome.setText("");
                 TextRG.setText("");

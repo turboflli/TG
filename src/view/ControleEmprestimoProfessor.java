@@ -122,7 +122,7 @@ public class ControleEmprestimoProfessor extends javax.swing.JFrame {
         jLabel6.setText("Data de");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel5.setText("Devoluçaõ");
+        jLabel5.setText("Realização");
 
         try {
             TextDataD.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));

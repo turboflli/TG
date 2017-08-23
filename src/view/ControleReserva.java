@@ -176,7 +176,7 @@ public class ControleReserva extends javax.swing.JFrame {
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "titulo", "autor" }));
 
         jButton4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton4.setText("jButton4");
+        jButton4.setText("Apagar reservas do banco");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -374,6 +374,8 @@ public class ControleReserva extends javax.swing.JFrame {
     }//GEN-LAST:event_Lista1ItemStateChanged
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        if(JOptionPane.showConfirmDialog(null, "Deseja apagar todas as reservas do banco\n até a data de hoje","Limpar", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION){
+    
         calen=new GregorianCalendar();
         String data=formato.format(calen.getTime());
         new Thread(new Runnable() {
@@ -381,6 +383,9 @@ public class ControleReserva extends javax.swing.JFrame {
             EmprestimoManager.killreserva(data);
         }
         }).start();
+        
+        }
+        
     }//GEN-LAST:event_jButton4ActionPerformed
 
     /**

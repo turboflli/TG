@@ -67,6 +67,9 @@ alter table emprestimo modify column livro2 int(7);
 alter table reserva modify column aluno int(7);
 alter table reserva modify column livro1 int(7);
 alter table reserva modify column livro2 int(7);
+alter table reserva add column vencida int(1) default 0;
+alter table livro modify column titulo varchar(400);
+alter table livro modify column autor varchar(200);
 ##select a.nome, c.liv1,c.liv2,c.dr,c.dd from aluno a right join 
 ##(select c.ida as idaluno,c.til1 as liv1, l.titulo as liv2,c.rea as dr,c.dev as dd from livro l right join 
 ##(select e.aluno as ida,l.titulo as til1 ,e.livro2 as id2,e.dataRealizacao as rea,e.dataDevolucao as dev from livro l inner join emprestimo e where e.livro1=l.id and e.dataRealizacao like '01%')

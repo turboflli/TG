@@ -38,7 +38,7 @@ public class EmprestimoManager {
                 quantidadeLivro1=rs.getInt("quantidade");
                 int totalReservados=0;
                     int id=0;
-                    rs=stm.executeQuery("select id,aluno,livro1,livro2 from reserva where livro1="+e.getLivro1()+" or livro2="+e.getLivro1()+" order by dataRealizacao");
+                    rs=stm.executeQuery("select id,aluno,livro1,livro2 from reserva where (livro1="+e.getLivro1()+" or livro2="+e.getLivro1()+") and vencida=0 order by dataRealizacao");
                     while(rs.next()){
                         if(rs.getInt("aluno")==e.getAluno()){//ve se o aluno é dono da reserva
                             int idLivro1=rs.getInt("livro1");
@@ -46,13 +46,13 @@ public class EmprestimoManager {
                             id=rs.getInt("id");
                             if(idLivro1==e.getLivro1()){//vê se o livro da reserva é o mesmo que o emprestado
                                 idLivro1=0;
-                                stm.execute("update reserva set livro1=null where id="+id);
+                               // stm.execute("update reserva set livro1=null where id="+id);
                             }
                             if(idLivro2==e.getLivro1()){
                                 idLivro2=0;
-                                stm.execute("update reserva set livro2=null where id="+id);
+                               // stm.execute("update reserva set livro2=null where id="+id);
                             }
-                            if(idLivro1==0 && idLivro2==0){stm.execute("delete from reserva where id="+id);}
+                            if(idLivro1==0 && idLivro2==0){stm.execute("update reserva set vencida=1 where id="+id);}
                             break;
                         }
                         totalReservados++;
@@ -69,7 +69,7 @@ public class EmprestimoManager {
                     quantidadeLivro2=rs.getInt("quantidade");
                     totalReservados=0;
                     id=0;
-                    rs=stm.executeQuery("select id,aluno,livro1,livro2 from reserva where livro1="+e.getLivro2()+" or livro2="+e.getLivro2()+" order by dataRealizacao");
+                    rs=stm.executeQuery("select id,aluno,livro1,livro2 from reserva where (livro1="+e.getLivro2()+" or livro2="+e.getLivro2()+") and vencida=0 order by dataRealizacao");
                     while(rs.next()){
                         if(rs.getInt("aluno")==e.getAluno()){//vê se é mesmo aluno da reserva
                             int idLivro1=rs.getInt("livro1");
@@ -77,13 +77,13 @@ public class EmprestimoManager {
                             id=rs.getInt("id");
                             if(idLivro1==e.getLivro2()){//ve se tem livro ou se tem mais reserva que livro
                                 idLivro1=0;
-                                stm.execute("update reserva set livro1=null where id="+id);
+                                //stm.execute("update reserva set livro1=null where id="+id);
                             }
                             if(idLivro2==e.getLivro2()){
                                 idLivro2=0;
-                                stm.execute("update reserva set livro2=null where id="+id);
+                                //stm.execute("update reserva set livro2=null where id="+id);
                             }
-                            if(idLivro1==0 && idLivro2==0){stm.execute("delete from reserva where id="+id);}
+                            if(idLivro1==0 && idLivro2==0){stm.execute("update reserva set vencida=1 where id="+id);}
                             break;
                         }
                         totalReservados++;
@@ -113,7 +113,7 @@ public class EmprestimoManager {
                     int quantidadeUnico=rs.getInt("quantidade");
                     int totalReservados=0;
                     int id=0;
-                    rs=stm.executeQuery("select id,aluno,livro1,livro2 from reserva where livro1="+e.getLivro1()+" or livro2="+e.getLivro1()+" order by dataRealizacao");
+                    rs=stm.executeQuery("select id,aluno,livro1,livro2 from reserva where (livro1="+e.getLivro1()+" or livro2="+e.getLivro1()+") and vencida=0order by dataRealizacao");
                     while(rs.next()){
                         if(rs.getInt("aluno")==e.getAluno()){
                             int idLivro1=rs.getInt("livro1");
@@ -121,13 +121,13 @@ public class EmprestimoManager {
                             id=rs.getInt("id");
                             if(idLivro1==e.getLivro1()){
                                 idLivro1=0;
-                                stm.execute("update reserva set livro1=null where id="+id);
+                                //stm.execute("update reserva set livro1=null where id="+id);
                             }
                             if(idLivro2==e.getLivro1()){
                                 idLivro2=0;
-                                stm.execute("update reserva set livro2=null where id="+id);
+                                //stm.execute("update reserva set livro2=null where id="+id);
                             }
-                            if(idLivro1==0 && idLivro2==0){stm.execute("delete from reserva where id="+id);}
+                            if(idLivro1==0 && idLivro2==0){stm.execute("update reserva set vencida=1 where id="+id);}
                             break;
                         }
                         totalReservados++;

@@ -10,7 +10,8 @@ package Model;
  * @author Lucas
  */
 public class LivroProfessor {
-    private int professorId,livroId;
+    private int professorId;
+    private int livroId;
     private String data;
     private boolean devlvido=false;
 

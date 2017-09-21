@@ -12,8 +12,15 @@ package Model;
  * @author Lucas
  */
 public class Emprestimos {
-    private int id,aluno,livro1,livro2,pendentes,multa;
-    private String datarealizacao,dataDevolucao,dataPagamento;
+    private int id;
+    private int aluno;
+    private int livro1;
+    private int livro2;
+    private int pendentes;
+    private int multa;
+    private String datarealizacao;
+    private String dataDevolucao;
+    private String dataPagamento;
 
     public Emprestimos(){}
 

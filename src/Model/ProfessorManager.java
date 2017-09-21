@@ -26,6 +26,7 @@ public class ProfessorManager {
             stm.execute("insert into professor(nome) values('"+p.getNome()+"')");
             JOptionPane.showMessageDialog(null, "Cadastrado com sucesso","Sucesso",JOptionPane.PLAIN_MESSAGE);
         } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Por favor anote e me passe: \n"+ex.getErrorCode(),"Erro",JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(Aluno.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

@@ -47,6 +47,7 @@ public class ControleDevolucao extends javax.swing.JFrame {
         TextMulta.setVisible(false);
         ButPagar.setVisible(false);
         ButAdiar.setVisible(false);
+        ButExcluir.setVisible(false);
     }
 
     /**
@@ -73,6 +74,7 @@ public class ControleDevolucao extends javax.swing.JFrame {
         ButLivro1 = new javax.swing.JButton();
         ButLivro2 = new javax.swing.JButton();
         ButAdiar = new javax.swing.JButton();
+        ButExcluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Devolução de Alunos");
@@ -80,6 +82,8 @@ public class ControleDevolucao extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(253, 253, 253));
         jPanel1.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(45, 46, 51), 14), javax.swing.BorderFactory.createLineBorder(new java.awt.Color(211, 217, 217), 8)));
+        jPanel1.setMinimumSize(new java.awt.Dimension(375, 356));
+        jPanel1.setPreferredSize(new java.awt.Dimension(580, 370));
 
         lRealizacao.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lRealizacao.setText("00/00/0000");
@@ -157,6 +161,15 @@ public class ControleDevolucao extends javax.swing.JFrame {
             }
         });
 
+        ButExcluir.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        ButExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/fire.png"))); // NOI18N
+        ButExcluir.setText("Excluir");
+        ButExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButExcluirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -186,7 +199,7 @@ public class ControleDevolucao extends javax.swing.JFrame {
                                 .addComponent(TextMulta, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(ButPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 27, Short.MAX_VALUE)
                                 .addComponent(ButAdiar))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(lRealizacao)
@@ -194,8 +207,9 @@ public class ControleDevolucao extends javax.swing.JFrame {
                                 .addComponent(jLabel1)
                                 .addGap(18, 18, 18)
                                 .addComponent(lDevolucao)))
-                        .addGap(158, 158, 158)))
-                .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(ButExcluir)
+                        .addGap(7, 7, 7))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -206,7 +220,7 @@ public class ControleDevolucao extends javax.swing.JFrame {
                     .addComponent(TextNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lLivro1)
                     .addComponent(ButLivro1))
@@ -224,7 +238,8 @@ public class ControleDevolucao extends javax.swing.JFrame {
                     .addComponent(ButPagar)
                     .addComponent(TextMulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(ButAdiar))
+                    .addComponent(ButAdiar)
+                    .addComponent(ButExcluir))
                 .addContainerGap())
         );
 
@@ -232,11 +247,11 @@ public class ControleDevolucao extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -247,11 +262,10 @@ public class ControleDevolucao extends javax.swing.JFrame {
             Aluno a=AlunoManager.consultar(TextNome.getText(),"nome");
             if(a!=null){
                 TextNome.setText(a.getNome());
-                e.setAluno(a.getId());
                 listaEmprestimos=EmprestimoManager.returnaTodos(TextNome.getText());
                 jComboBox1.removeAllItems();
-                for(int u=0;u<listaEmprestimos.size();u++){
-                 jComboBox1.addItem(listaEmprestimos.get(u).getId());
+                for (Emprestimos listaEmprestimo : listaEmprestimos) {
+                    jComboBox1.addItem(listaEmprestimo.getId());
                 }
                 
                 
@@ -263,23 +277,23 @@ public class ControleDevolucao extends javax.swing.JFrame {
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
         if(jComboBox1.getItemCount()>0){
-            
-            Emprestimos escolhido=listaEmprestimos.get(jComboBox1.getSelectedIndex());
-            if(escolhido.getPendentes()==3 ){
-                lLivro1.setText(EmprestimoManager.getLivro(escolhido.getLivro1()));
-                lLivro2.setText(EmprestimoManager.getLivro(escolhido.getLivro2()));
+            ButExcluir.setVisible(true);
+            e=listaEmprestimos.get(jComboBox1.getSelectedIndex());
+            if(e.getPendentes()==3 ){
+                lLivro1.setText(EmprestimoManager.getLivro(e.getLivro1()));
+                lLivro2.setText(EmprestimoManager.getLivro(e.getLivro2()));
                 lLivro1.setVisible(true);
                 lLivro2.setVisible(true);
                 ButLivro1.setVisible(true);
                 ButLivro2.setVisible(true);
-            }else if(escolhido.getPendentes()==1){
-                lLivro1.setText(EmprestimoManager.getLivro(escolhido.getLivro1()));
+            }else if(e.getPendentes()==1){
+                lLivro1.setText(EmprestimoManager.getLivro(e.getLivro1()));
                 lLivro1.setVisible(true);
                 ButLivro1.setVisible(true);
                 lLivro2.setVisible(false);
                 ButLivro2.setVisible(false);
-            }else if(escolhido.getPendentes()==2){
-                lLivro2.setText(EmprestimoManager.getLivro(escolhido.getLivro2()));
+            }else if(e.getPendentes()==2){
+                lLivro2.setText(EmprestimoManager.getLivro(e.getLivro2()));
                 lLivro2.setVisible(true);
                 ButLivro2.setVisible(true);
                 lLivro1.setVisible(false);
@@ -291,23 +305,23 @@ public class ControleDevolucao extends javax.swing.JFrame {
                 lLivro2.setVisible(false);
             }
             ButAdiar.setVisible(true);
-            String data=escolhido.getDatarealizacao();
+            String data=e.getDatarealizacao();
             data=data.substring(0, 2)+"/"+data.substring(2, 4)+"/"+data.substring(4);
             lRealizacao.setText(data);
-            data=escolhido.getDataDevolucao();
+            data=e.getDataDevolucao();
             data=data.substring(0, 2)+"/"+data.substring(2, 4)+"/"+data.substring(4);
             lDevolucao.setText(data);
             lRealizacao.setVisible(true);
             lDevolucao.setVisible(true);
             jLabel1.setVisible(true);
-            if( escolhido.getMulta()>0){
+            if( e.getMulta()>0){
                 jLabel2.setVisible(true);
                 TextMulta.setVisible(true);
                 ButPagar.setVisible(true);
-                if(escolhido.getMulta()>9){
-                TextMulta.setText(Integer.toString(escolhido.getMulta()));
+                if(e.getMulta()>9){
+                TextMulta.setText(Integer.toString(e.getMulta()));
                 }else{
-                    TextMulta.setText("0"+Integer.toString(escolhido.getMulta()));
+                    TextMulta.setText("0"+Integer.toString(e.getMulta()));
                 }
             }else{
                 jLabel2.setVisible(false);
@@ -341,14 +355,14 @@ public class ControleDevolucao extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox1ItemStateChanged
 
     private void ButLivro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButLivro1ActionPerformed
-        Emprestimos escolhido=listaEmprestimos.get(jComboBox1.getSelectedIndex());
-        EmprestimoManager.devolver(escolhido,EmprestimoManager.Livro1Pendente);
+        e=listaEmprestimos.get(jComboBox1.getSelectedIndex());
+        EmprestimoManager.devolver(e,EmprestimoManager.Livro1Pendente);
         ButLivro1.setVisible(false);
         lLivro1.setVisible(false);
-        escolhido.setPendentes(escolhido.getPendentes()-1);
+        e.setPendentes(e.getPendentes()-1);
         calen=new GregorianCalendar();
-        if(escolhido.getPendentes()==0 && 
-                escolhido.getDataDevolucao().equals(formato.format(calen.getTime()).replace("/", ""))){
+        if(e.getPendentes()==0 && 
+                e.getDataDevolucao().equals(formato.format(calen.getTime()).replace("/", ""))){
             new Thread(new Runnable() {
             public void run() {
                 EmprestimoManager.contar();
@@ -356,32 +370,32 @@ public class ControleDevolucao extends javax.swing.JFrame {
             }).start();
             
         }
-        listaEmprestimos.set(jComboBox1.getSelectedIndex(), escolhido);
+        listaEmprestimos.set(jComboBox1.getSelectedIndex(), e);
     }//GEN-LAST:event_ButLivro1ActionPerformed
 
     private void ButLivro2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButLivro2ActionPerformed
-        Emprestimos escolhido=listaEmprestimos.get(jComboBox1.getSelectedIndex());
-        EmprestimoManager.devolver(escolhido,EmprestimoManager.Livro2Pendente);
+        e=listaEmprestimos.get(jComboBox1.getSelectedIndex());
+        EmprestimoManager.devolver(e,EmprestimoManager.Livro2Pendente);
         ButLivro2.setVisible(false);
         lLivro2.setVisible(false);
-        escolhido.setPendentes(escolhido.getPendentes()-2);
-        if(escolhido.getPendentes()==0 && 
-                escolhido.getDataDevolucao().equals(formato.format(calen.getTime()).replace("/", ""))){
+        e.setPendentes(e.getPendentes()-2);
+        if(e.getPendentes()==0 && 
+                e.getDataDevolucao().equals(formato.format(calen.getTime()).replace("/", ""))){
             new Thread(new Runnable() {
             public void run() {
                 EmprestimoManager.contar();
             }
             }).start();
         }
-        listaEmprestimos.set(jComboBox1.getSelectedIndex(), escolhido);
+        listaEmprestimos.set(jComboBox1.getSelectedIndex(), e);
     }//GEN-LAST:event_ButLivro2ActionPerformed
 
     private void ButPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButPagarActionPerformed
-        Emprestimos escolhido=listaEmprestimos.get(jComboBox1.getSelectedIndex());
-        escolhido.setMulta(Integer.parseInt(TextMulta.getText()));
+         e=listaEmprestimos.get(jComboBox1.getSelectedIndex());
+        e.setMulta(Integer.parseInt(TextMulta.getText()));
         calen= new GregorianCalendar();
-        escolhido.setDataPagamento(formato.format(calen.getTime()).replace("/", ""));
-        if(EmprestimoManager.pagar(escolhido)){
+        e.setDataPagamento(formato.format(calen.getTime()).replace("/", ""));
+        if(EmprestimoManager.pagar(e)){
             jLabel2.setVisible(false);
             TextMulta.setVisible(false);
             ButPagar.setVisible(false);
@@ -390,7 +404,7 @@ public class ControleDevolucao extends javax.swing.JFrame {
     }//GEN-LAST:event_ButPagarActionPerformed
 
     private void ButAdiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButAdiarActionPerformed
-         Emprestimos escolhido=listaEmprestimos.get(jComboBox1.getSelectedIndex());
+          e=listaEmprestimos.get(jComboBox1.getSelectedIndex());
          calen=new GregorianCalendar();
          int d=7;
          try{
@@ -398,8 +412,8 @@ public class ControleDevolucao extends javax.swing.JFrame {
          }catch(NumberFormatException e){
              d=7;
          }
-         String h=escolhido.getDataDevolucao();
-         if(escolhido.getDataDevolucao().equals(formato.format(calen.getTime()).replace("/", ""))){
+         String h=e.getDataDevolucao();
+         if(e.getDataDevolucao().equals(formato.format(calen.getTime()).replace("/", ""))){
              new Thread(new Runnable() {
             public void run() {
                 EmprestimoManager.contar();
@@ -415,11 +429,40 @@ public class ControleDevolucao extends javax.swing.JFrame {
          calen.add(Calendar.DAY_OF_YEAR, d);
          h=formato.format(calen.getTime());
          lDevolucao.setText(h);
-         escolhido.setDataDevolucao(h.replace("/",""));
-         EmprestimoManager.adiar(escolhido);
-        listaEmprestimos.set(jComboBox1.getSelectedIndex(), escolhido);
+         e.setDataDevolucao(h.replace("/",""));
+         EmprestimoManager.adiar(e);
+        listaEmprestimos.set(jComboBox1.getSelectedIndex(), e);
         
     }//GEN-LAST:event_ButAdiarActionPerformed
+
+    private void ButExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButExcluirActionPerformed
+        int resposta=JOptionPane.showConfirmDialog(null, "Tem certeza que quer deletar?\nSerá excluido permanentemente", "Exclusão", JOptionPane.YES_NO_OPTION);
+        if(resposta==JOptionPane.YES_OPTION) {
+            
+            String respost=JOptionPane.showInputDialog(null, "Escreva 'deletar' \nignorar maiusculo e minusculo", "Confirmação", JOptionPane.QUESTION_MESSAGE);
+            if(respost.equalsIgnoreCase("deletar")){
+                e=listaEmprestimos.get(jComboBox1.getSelectedIndex());
+                EmprestimoManager.Deletar(e);
+                
+                jComboBox1.removeAllItems();
+                ButLivro1.setVisible(false);
+                ButLivro2.setVisible(false);
+                lLivro1.setVisible(false);
+                lLivro1.setText("");
+                lLivro2.setVisible(false);
+                lLivro2.setText("");
+                lRealizacao.setVisible(false);
+                lDevolucao.setVisible(false);
+                jLabel1.setVisible(false);
+                jLabel2.setVisible(false);
+                TextMulta.setVisible(false);
+                ButPagar.setVisible(false);
+                ButAdiar.setVisible(false);
+                ButExcluir.setVisible(false);
+                
+            }}
+        
+    }//GEN-LAST:event_ButExcluirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -465,6 +508,7 @@ public class ControleDevolucao extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ButAdiar;
+    private javax.swing.JButton ButExcluir;
     private javax.swing.JButton ButLivro1;
     private javax.swing.JButton ButLivro2;
     private javax.swing.JButton ButPagar;

@@ -113,7 +113,7 @@ public class EmprestimoManager {
                     int quantidadeUnico=rs.getInt("quantidade");
                     int totalReservados=0;
                     int id=0;
-                    rs=stm.executeQuery("select id,aluno,livro1,livro2 from reserva where (livro1="+e.getLivro1()+" or livro2="+e.getLivro1()+") and vencida=0order by dataRealizacao");
+                    rs=stm.executeQuery("select id,aluno,livro1,livro2 from reserva where (livro1="+e.getLivro1()+" or livro2="+e.getLivro1()+") and vencida=0 order by dataRealizacao");
                     while(rs.next()){
                         if(rs.getInt("aluno")==e.getAluno()){
                             int idLivro1=rs.getInt("livro1");
@@ -186,7 +186,15 @@ public class EmprestimoManager {
     }
     
     
-    
+    public static void Deletar(Emprestimos e){
+        try {
+            Statement stm=con.createStatement();
+            stm.execute("delete from emprestimo where id="+e.getId());
+            JOptionPane.showMessageDialog(null, "Exclusão feita com sucesso","Sucesso",JOptionPane.PLAIN_MESSAGE);
+        } catch (SQLException ex) {
+            Logger.getLogger(Aluno.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
     public static  ArrayList<Emprestimos> returnaTodos(String nome){
         ArrayList<Emprestimos> todos=new ArrayList<>();

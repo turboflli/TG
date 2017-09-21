@@ -3,15 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model;
+package imagens;
 
 /**
  *
  * @author Lucas
  */
 public class Devolucao {
-    private int id,aluno,livro1,livro2,multa;
-    private String dataRealizacao,dataFinal;
+    private int id;
+    private int aluno;
+    private int livro1;
+    private int livro2;
+    private int multa;
+    private String dataRealizacao;
+    private String dataFinal;
     
     
     public Devolucao(){}

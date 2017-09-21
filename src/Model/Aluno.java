@@ -11,8 +11,15 @@ package Model;
  * @author Lucas
  */
 public class Aluno {
-    private String nome,rg,ra,email,telefone,curso;
-    private int id,semestre,periodo;
+    private String nome;
+    private String rg;
+    private String ra;
+    private String email;
+    private String telefone;
+    private String curso;
+    private int id;
+    private int semestre;
+    private int periodo;
     
 public Aluno(int id,String nome, String rg, String ra, String email, String telefone, String curso,  int semestre, int periodo) {
         this.id = id;    

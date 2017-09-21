@@ -316,7 +316,7 @@ public class ControleEmprestimos extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         ArrayList<String> comp=new ArrayList<String>();
         Lista2.removeAllItems();
-       comp=EmprestimoManager.listar(TextLivro1.getText(),jComboBox1.getSelectedItem().toString());
+       comp=EmprestimoManager.listar(TextLivro2.getText(),jComboBox1.getSelectedItem().toString());
        if(comp.size()>=1){
             for (String vez:comp){
                 Lista2.addItem(vez);

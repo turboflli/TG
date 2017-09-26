@@ -329,6 +329,7 @@ public class EmprestimoManager {
         try {
             stm = con.createStatement();
             stm.execute("update emprestimo e set e.multa=e.multa+1 where e.pendentes>0 and  str_to_date(dataDevolucao,'%d%m%Y')<STR_TO_DATE('"+data+"','%d/%m/%Y')");
+            stm.execute("update emprestimo e set e.multa=e.multa+1 where e.pendentes=3 and  str_to_date(dataDevolucao,'%d%m%Y')<STR_TO_DATE('"+data+"','%d/%m/%Y')");//multa de dois livros
                 
             } catch (SQLException ex) {
                 Logger.getLogger(EmprestimoManager.class.getName()).log(Level.SEVERE, null, ex);

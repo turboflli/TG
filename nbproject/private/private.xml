@@ -3,9 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Lucas/Documents/NetBeansProjects/TGBiblioteca/src/view/ControleEmprestimos.java</file>
+            <file>file:/C:/Users/Lucas/Documents/NetBeansProjects/TGBiblioteca/src/Model/CadastradorDeLivros.java</file>
             <file>file:/C:/Users/Lucas/Documents/NetBeansProjects/TGBiblioteca/src/Model/Conexao.java</file>
-            <file>file:/C:/Users/Lucas/Documents/NetBeansProjects/TGBiblioteca/src/view/ControleReserva.java</file>
+            <file>file:/C:/Users/Lucas/Documents/NetBeansProjects/TGBiblioteca/src/view/ControleLivro.java</file>
+            <file>file:/C:/Users/Lucas/Documents/NetBeansProjects/TGBiblioteca/src/view/Menu.java</file>
+            <file>file:/C:/Users/Lucas/Documents/NetBeansProjects/TGBiblioteca/src/Model/GeradorRelatorios.java</file>
         </group>
     </open-files>
 </project-private>

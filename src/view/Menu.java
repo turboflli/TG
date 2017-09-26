@@ -387,6 +387,7 @@ public class Menu extends javax.swing.JFrame {
     
     public static void inc(){
         jProgressBar1.setValue(jProgressBar1.getValue()+1);
+        jProgressBar1.setToolTipText(Double.toString(  (jProgressBar1.getValue()/(float)jProgressBar1.getMaximum() )*100.0   ));
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

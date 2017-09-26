@@ -84,21 +84,27 @@ public class ControleDevolucao extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(45, 46, 51), 14), javax.swing.BorderFactory.createLineBorder(new java.awt.Color(211, 217, 217), 8)));
         jPanel1.setMinimumSize(new java.awt.Dimension(375, 356));
         jPanel1.setPreferredSize(new java.awt.Dimension(580, 370));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lRealizacao.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lRealizacao.setText("00/00/0000");
+        jPanel1.add(lRealizacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 234, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setText("-");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 231, -1, 22));
 
         lDevolucao.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lDevolucao.setText("00/00/0000");
+        jPanel1.add(lDevolucao, new org.netbeans.lib.awtextra.AbsoluteConstraints(179, 234, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Multa:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 294, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel7.setText("Nome:");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 36, -1, -1));
 
         ButPagar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         ButPagar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/coin.png"))); // NOI18N
@@ -108,6 +114,7 @@ public class ControleDevolucao extends javax.swing.JFrame {
                 ButPagarActionPerformed(evt);
             }
         });
+        jPanel1.add(ButPagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(153, 274, 149, -1));
 
         TextNome.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         TextNome.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -115,6 +122,7 @@ public class ControleDevolucao extends javax.swing.JFrame {
                 TextNomeKeyPressed(evt);
             }
         });
+        jPanel1.add(TextNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 33, 427, -1));
 
         try {
             TextMulta.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##")));
@@ -123,6 +131,7 @@ public class ControleDevolucao extends javax.swing.JFrame {
         }
         TextMulta.setText("00");
         TextMulta.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jPanel1.add(TextMulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(99, 291, 36, -1));
 
         jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jComboBox1.addItemListener(new java.awt.event.ItemListener() {
@@ -130,12 +139,15 @@ public class ControleDevolucao extends javax.swing.JFrame {
                 jComboBox1ItemStateChanged(evt);
             }
         });
+        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 79, 385, -1));
 
         lLivro1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lLivro1.setText("jLabel1");
+        jPanel1.add(lLivro1, new org.netbeans.lib.awtextra.AbsoluteConstraints(143, 137, -1, -1));
 
         lLivro2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lLivro2.setText("jLabel2");
+        jPanel1.add(lLivro2, new org.netbeans.lib.awtextra.AbsoluteConstraints(143, 186, -1, -1));
 
         ButLivro1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         ButLivro1.setText("Devolver");
@@ -144,6 +156,7 @@ public class ControleDevolucao extends javax.swing.JFrame {
                 ButLivro1ActionPerformed(evt);
             }
         });
+        jPanel1.add(ButLivro1, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 133, -1, -1));
 
         ButLivro2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         ButLivro2.setText("Devolver");
@@ -152,6 +165,7 @@ public class ControleDevolucao extends javax.swing.JFrame {
                 ButLivro2ActionPerformed(evt);
             }
         });
+        jPanel1.add(ButLivro2, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 182, -1, -1));
 
         ButAdiar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         ButAdiar.setText("adiar");
@@ -160,6 +174,7 @@ public class ControleDevolucao extends javax.swing.JFrame {
                 ButAdiarActionPerformed(evt);
             }
         });
+        jPanel1.add(ButAdiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(308, 290, -1, -1));
 
         ButExcluir.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         ButExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/fire.png"))); // NOI18N
@@ -169,79 +184,7 @@ public class ControleDevolucao extends javax.swing.JFrame {
                 ButExcluirActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(TextNome, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(ButLivro2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(ButLivro1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lLivro2)
-                            .addComponent(lLivro1)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(TextMulta, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(ButPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 27, Short.MAX_VALUE)
-                                .addComponent(ButAdiar))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(lRealizacao)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(lDevolucao)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(ButExcluir)
-                        .addGap(7, 7, 7))))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(TextNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lLivro1)
-                    .addComponent(ButLivro1))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ButLivro2)
-                    .addComponent(lLivro2))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lRealizacao)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lDevolucao))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ButPagar)
-                    .addComponent(TextMulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(ButAdiar)
-                    .addComponent(ButExcluir))
-                .addContainerGap())
-        );
+        jPanel1.add(ButExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(389, 276, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -282,6 +225,8 @@ public class ControleDevolucao extends javax.swing.JFrame {
             if(e.getPendentes()==3 ){
                 lLivro1.setText(EmprestimoManager.getLivro(e.getLivro1()));
                 lLivro2.setText(EmprestimoManager.getLivro(e.getLivro2()));
+                lLivro1.setToolTipText(EmprestimoManager.getLivro(e.getLivro1()));
+                lLivro2.setToolTipText(EmprestimoManager.getLivro(e.getLivro2()));
                 lLivro1.setVisible(true);
                 lLivro2.setVisible(true);
                 ButLivro1.setVisible(true);
@@ -292,12 +237,14 @@ public class ControleDevolucao extends javax.swing.JFrame {
                 ButLivro1.setVisible(true);
                 lLivro2.setVisible(false);
                 ButLivro2.setVisible(false);
+                lLivro1.setToolTipText(EmprestimoManager.getLivro(e.getLivro1()));
             }else if(e.getPendentes()==2){
                 lLivro2.setText(EmprestimoManager.getLivro(e.getLivro2()));
                 lLivro2.setVisible(true);
                 ButLivro2.setVisible(true);
                 lLivro1.setVisible(false);
                 ButLivro1.setVisible(false);
+                lLivro2.setToolTipText(EmprestimoManager.getLivro(e.getLivro2()));
             }else{
                 ButLivro1.setVisible(false);
                 ButLivro2.setVisible(false);
@@ -351,6 +298,19 @@ public class ControleDevolucao extends javax.swing.JFrame {
                     Logger.getLogger(ControleDevolucao.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }*/
+        }else{
+            ButLivro1.setVisible(false);
+        ButLivro2.setVisible(false);
+        lLivro1.setVisible(false);
+        lLivro2.setVisible(false);
+        lRealizacao.setVisible(false);
+        lDevolucao.setVisible(false);
+        jLabel1.setVisible(false);
+        jLabel2.setVisible(false);
+        TextMulta.setVisible(false);
+        ButPagar.setVisible(false);
+        ButAdiar.setVisible(false);
+        ButExcluir.setVisible(false);
         }
     }//GEN-LAST:event_jComboBox1ItemStateChanged
 

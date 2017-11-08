@@ -367,8 +367,15 @@ public class ControleDevolucao extends javax.swing.JFrame {
           e=listaEmprestimos.get(jComboBox1.getSelectedIndex());
          calen=new GregorianCalendar();
          int d=7;
+         String resp="";
          try{
-             d=Integer.parseInt(JOptionPane.showInputDialog("Digite o número de dias\nignore se for 7"));
+             resp=JOptionPane.showInputDialog("Digite o número de dias\nignore se for 7");
+             if(resp==null){
+                 d=0;
+             }else{
+                d=Integer.parseInt(resp);
+             }
+             
          }catch(NumberFormatException e){
              d=7;
          }

@@ -18,7 +18,8 @@ public class Conexao {
             try{
 			
 			//Class.forName("com.mysql.jdbc.Driver");// diz qual é o tipo de sgbd que vc está usando, jdbc
-			con=  DriverManager.getConnection("jdbc:mysql://"+maq+"/"+nome_db+"?user="+user+"&password="+senha);//classe de conexão
+			con=  DriverManager.getConnection("jdbc:mysql://"+maq+"/"+nome_db+"?"
+                                + "user="+user+"&password="+senha);//classe de conexão
 			//Statement stm =  conn.createStatement();
 			//return stm;
 		}

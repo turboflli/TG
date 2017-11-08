@@ -130,7 +130,7 @@ public class Menu extends javax.swing.JFrame {
         });
 
         jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Novembro", "Dezembro" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro" }));
 
         jButton7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pen.png"))); // NOI18N
@@ -175,7 +175,7 @@ public class Menu extends javax.swing.JFrame {
         });
 
         lcont.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lcont.setText("Emprestimos previstos para hoje: ");
+        lcont.setText("Devoluções previstas para hoje: ");
 
         jProgressBar1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

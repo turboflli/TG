@@ -162,8 +162,13 @@ public class ControleLivro extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        TextEdicao.setText("00");
+        TextEdicao.setText("");
         TextEdicao.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        TextEdicao.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                TextEdicaoFocusLost(evt);
+            }
+        });
         jPanel1.add(TextEdicao, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, 59, -1));
 
         try {
@@ -171,8 +176,13 @@ public class ControleLivro extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        TextQuantidade.setText("00");
+        TextQuantidade.setText("");
         TextQuantidade.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        TextQuantidade.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                TextQuantidadeFocusLost(evt);
+            }
+        });
         jPanel1.add(TextQuantidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 340, 59, -1));
 
         ButGravar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -295,9 +305,8 @@ public class ControleLivro extends javax.swing.JFrame {
                 l=new Livro();
                 TextTitulo.setText("");
                 TextAutor.setText("");
+                TextQuantidade.setText("");
                 TextEdicao.setText("");
-                TextQuantidade.setText("00");
-                TextEdicao.setText("00");
                 ButAlterar.setVisible(false);
                 ButExcluir.setVisible(false);
             }
@@ -319,9 +328,8 @@ public class ControleLivro extends javax.swing.JFrame {
                 l=new Livro();
                 TextTitulo.setText("");
                 TextAutor.setText("");
+                TextQuantidade.setText("");
                 TextEdicao.setText("");
-                TextQuantidade.setText("00");
-                TextEdicao.setText("00");
                 ButAlterar.setVisible(false);
                 ButExcluir.setVisible(false);
             }
@@ -358,6 +366,24 @@ public class ControleLivro extends javax.swing.JFrame {
     private void fileChooserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileChooserActionPerformed
      
     }//GEN-LAST:event_fileChooserActionPerformed
+
+    private void TextEdicaoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TextEdicaoFocusLost
+        if(TextEdicao.getText().substring(1).equals(" ")){
+            TextEdicao.setText("0"+TextEdicao.getText());
+        }
+        if(TextEdicao.getText().substring(0,1).equals(" ") && !TextEdicao.getText().substring(1).equals(" ")){
+            TextEdicao.setText(TextEdicao.getText()+"0");
+        }
+    }//GEN-LAST:event_TextEdicaoFocusLost
+
+    private void TextQuantidadeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TextQuantidadeFocusLost
+        if(TextQuantidade.getText().substring(1).equals(" ")){
+            TextQuantidade.setText("0"+TextQuantidade.getText());
+        }
+        if(TextQuantidade.getText().substring(0,1).equals(" ") && !TextQuantidade.getText().substring(1).equals(" ")){
+            TextQuantidade.setText(TextQuantidade.getText()+"0");
+        }
+    }//GEN-LAST:event_TextQuantidadeFocusLost
     public static void setMax(int max){
         jProgressBar1.setMaximum(max);
         jProgressBar1.setValue(0);

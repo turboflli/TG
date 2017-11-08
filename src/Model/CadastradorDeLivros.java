@@ -59,7 +59,7 @@ public class CadastradorDeLivros extends Thread{
                    Cell editora = linha.getCell(2);
                    Cell quantidade = linha.getCell(3);
                 
-                if (linha.getRowNum()>1 && (!titulo.getStringCellValue().equalsIgnoreCase("título") ||!titulo.getStringCellValue().equalsIgnoreCase("titulo") ) && quantidade.getCellType()== Cell.CELL_TYPE_NUMERIC){
+                if ( (!titulo.getStringCellValue().equalsIgnoreCase("título") ||!titulo.getStringCellValue().equalsIgnoreCase("titulo") ) && quantidade.getCellType()== Cell.CELL_TYPE_NUMERIC){
                     
                         
                             try {

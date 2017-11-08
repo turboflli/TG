@@ -12,8 +12,8 @@ package Model;
 public class LivroProfessor {
     private int professorId;
     private int livroId;
-    private String data;
-    private boolean devlvido=false;
+    private String dataRealizacao;
+    private String dataDevolucao;
 
     /**
      * @return the prof
@@ -46,29 +46,29 @@ public class LivroProfessor {
     /**
      * @return the data
      */
-    public String getData() {
-        return data;
+    public String getDataRealizacao() {
+        return dataRealizacao;
     }
 
     /**
-     * @param data the data to set
+     * @param dataRealizacao the data to set
      */
-    public void setData(String data) {
-        this.data = data;
+    public void setDataRealizacao(String dataRealizacao) {
+        this.dataRealizacao = dataRealizacao;
     }
 
     /**
      * @return the devlvido
      */
-    public boolean isDevlvido() {
-        return devlvido;
+    public String isDevlvido() {
+        return dataDevolucao;
     }
 
     /**
      * @param devlvido the devlvido to set
      */
-    public void setDevlvido(boolean devlvido) {
-        this.devlvido = devlvido;
+    public void setDevlvido(String dataDevolucao) {
+        this.dataDevolucao = dataDevolucao;
     }
     
 }

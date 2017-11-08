@@ -9,7 +9,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -29,7 +31,7 @@ public class LivroProfessorManager {
             if(q==0){
                 JOptionPane.showMessageDialog(null, "Livro  indisponível\ntodos os exemplares já estão emprestados","Sem",JOptionPane.ERROR_MESSAGE);
             }else{
-                stm.execute("insert into livrosprofessor(idprofessor,idlivro,dataRealizacao) values ("+lp.getProfessorId()+","+lp.getLivroId()+",'"+lp.getData()+"')");
+                stm.execute("insert into livrosprofessor(idprofessor,idlivro,dataRealizacao) values ("+lp.getProfessorId()+","+lp.getLivroId()+",'"+lp.getDataRealizacao()+"')");
                 q--;
                 stm.execute("update livro set quantidade="+q+" where id="+lp.getLivroId());
                 JOptionPane.showMessageDialog(null, "Cadastrado com sucesso","Sucesso",JOptionPane.PLAIN_MESSAGE);
@@ -97,7 +99,11 @@ public class LivroProfessorManager {
     public static void devolverLivro(LivroProfessor lp){
         try {
             Statement stm=con.createStatement();
-            stm.execute("update livrosprofessor set devolvido=true where idprofessor="+lp.getProfessorId()+" and idlivro="+lp.getLivroId());
+            GregorianCalendar calen=new GregorianCalendar();
+        SimpleDateFormat formato = new SimpleDateFormat("ddMMyyyy"); 
+        String data=formato.format(calen.getTime());
+            stm.execute("update livrosprofessor set dataDevolucao='"+data+"' where "
+                    + "idprofessor="+lp.getProfessorId()+" and idlivro="+lp.getLivroId());
             ResultSet rs=stm.executeQuery("select quantidade from livro where id="+lp.getLivroId());
             rs.next();
             int q=rs.getInt("quantidade");
@@ -114,7 +120,8 @@ public class LivroProfessorManager {
         ArrayList<String> lista=new ArrayList<String>();
         try {
             Statement stm=con.createStatement();
-            ResultSet rs=stm.executeQuery("select l.titulo as tit,l.autor as aut from livro l inner join livrosprofessor e on e.devolvido=false and e.idprofessor="+id+" and e.idlivro=l.id");
+            ResultSet rs=stm.executeQuery("select l.titulo as tit,l.autor as aut from livro l inner join "
+                    + "livrosprofessor e on e.dataDevolucao='' and e.idprofessor="+id+" and e.idlivro=l.id");
             while(rs.next()){
                 lista.add(rs.getString("tit")+"¬"+rs.getString("aut"));
             }
@@ -128,7 +135,8 @@ public class LivroProfessorManager {
         int u=0;
         try {
             Statement stm=con.createStatement();
-            ResultSet rs=stm.executeQuery("select id from livro where titulo='"+titulo+"' and autor='"+autor+"'");
+            ResultSet rs=stm.executeQuery("select id from livro where titulo='"+titulo+"' "
+                    + "and autor='"+autor+"'");
             while(rs.next()){
                u=rs.getInt("id");
             }

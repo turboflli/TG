@@ -158,7 +158,7 @@ public class GeradorRelatorios extends Thread{
             Document documento=new Document();
             
             
-            FileOutputStream ot=new FileOutputStream("Emprestimos_Com_professor.pdf", true);
+            FileOutputStream ot=new FileOutputStream("Emprestimos_Com_professor"+this.mes+".pdf", true);
             PdfWriter.getInstance(documento, ot);
             PdfPTable table;
             documento.open();
@@ -198,7 +198,7 @@ public class GeradorRelatorios extends Thread{
             
             
                 stm = con.createStatement();
-                ResultSet rs=stm.executeQuery("select l.titulo as titulo,l.autor as autor,e.dataRealizacao as dr from livro l inner join livrosprofessor e on e.devolvido=false and e.idlivro=l.id  and e.dataRealizacao like '__"+this.mes+"____' and e.idprofessor="+id);
+                ResultSet rs=stm.executeQuery("select l.titulo as titulo,l.autor as autor,e.dataRealizacao as dr from livro l inner join livrosprofessor e on e.dataDevolucao='' and e.idlivro=l.id  and e.dataRealizacao like '__"+this.mes+"____' and e.idprofessor="+id);
             
                 String data="";
                 //atuais
@@ -229,18 +229,24 @@ public class GeradorRelatorios extends Thread{
                 
                 
                 
-                table = new PdfPTable(2);
+                table = new PdfPTable(3);
                 table.setSpacingAfter(20);
+                marge=new float[3];
+                marge[0]=175.0f;
+                marge[1]=175.0f;
+                marge[2]=175.0f;
                 table.setTotalWidth(marge);
                 table.setLockedWidth(true);
                 cell2 = new PdfPCell(new Paragraph("livro"));
-                cell3 = new PdfPCell(new Paragraph("Data"));
+                cell3 = new PdfPCell(new Paragraph("Realização"));
+                PdfPCell cell4 = new PdfPCell(new Paragraph("Devolução"));
             
 
                 table.addCell(cell2);
                 table.addCell(cell3);
+                table.addCell(cell4);
                 //devolvidos
-                rs=stm.executeQuery("select l.titulo as titulo,l.autor as autor,e.dataRealizacao as dr from livro l inner join livrosprofessor e on e.devolvido=true and e.idlivro=l.id  and e.dataRealizacao like '__"+this.mes+"____' and e.idprofessor="+id);
+                rs=stm.executeQuery("select l.titulo as titulo,l.autor as autor,e.dataRealizacao as dr, e.dataDevolucao as dd from livro l inner join livrosprofessor e on e.dataDevolucao!='' and e.idlivro=l.id  and e.dataRealizacao like '__"+this.mes+"____' and e.idprofessor="+id);
             
                 data="";
             
@@ -251,9 +257,13 @@ public class GeradorRelatorios extends Thread{
                     data=rs.getString("dr");
                     data=data.substring(0, 2)+"/"+data.substring(2,4)+"/"+data.substring(4);
                    cell3 = new PdfPCell(new Paragraph(data));
+                   data=rs.getString("dd");
+                    data=data.substring(0, 2)+"/"+data.substring(2,4)+"/"+data.substring(4);
+                   cell4=new PdfPCell(new Paragraph(data));
 
                     table.addCell(cell2);
                     table.addCell(cell3);
+                    table.addCell(cell4);
 
                 }
                 

@@ -235,7 +235,7 @@ public class ControleEmprestimoProfessor extends javax.swing.JFrame {
         } catch (ParseException ex) {
             Logger.getLogger(ControleEmprestimoProfessor.class.getName()).log(Level.SEVERE, null, ex);
         }
-            lp.setData(formato.format(calen.getTime()).replace("/", ""));
+            lp.setDataRealizacao(formato.format(calen.getTime()).replace("/", ""));
             LivroProfessorManager.cadastrar(lp);
             Lista1.removeAllItems();
         

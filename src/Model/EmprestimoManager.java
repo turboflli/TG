@@ -38,7 +38,9 @@ public class EmprestimoManager {
                 quantidadeLivro1=rs.getInt("quantidade");
                 int totalReservados=0;
                     int id=0;
-                    rs=stm.executeQuery("select id,aluno,livro1,livro2 from reserva where (livro1="+e.getLivro1()+" or livro2="+e.getLivro1()+") and vencida=0 order by dataRealizacao");
+                    rs=stm.executeQuery("select id,aluno,livro1,livro2 from reserva where "
+                            + "(livro1="+e.getLivro1()+" or livro2="+e.getLivro1()+") and "
+                            + "vencida=0 order by dataRealizacao");
                     while(rs.next()){
                         if(rs.getInt("aluno")==e.getAluno()){//ve se o aluno é dono da reserva
                             int idLivro1=rs.getInt("livro1");
@@ -52,7 +54,8 @@ public class EmprestimoManager {
                                 idLivro2=0;
                                // stm.execute("update reserva set livro2=null where id="+id);
                             }
-                            if(idLivro1==0 && idLivro2==0){stm.execute("update reserva set vencida=1 where id="+id);}
+                            if(idLivro1==0 && idLivro2==0){stm.execute("update reserva set vencida=1 where"
+                                    + " id="+id);}
                             break;
                         }
                         totalReservados++;
@@ -60,16 +63,22 @@ public class EmprestimoManager {
                     }
                 
                 if(quantidadeLivro1==0 || quantidadeLivro1<=totalReservados){//ve se tem livro ou se tem mais reserva que livro
-                    JOptionPane.showMessageDialog(null, "Livro 1 indisponível\ntodos os exemplares já estão emprestados","Sem",JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Livro 1 indisponível\ntodos os exemplares já "
+                            + "estão emprestados","Sem",JOptionPane.ERROR_MESSAGE);
                     //abre reserva
-                    if(JOptionPane.showConfirmDialog(null, "Quer fazer uma reserva?", "Reserva", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION){ControleReserva cr=new ControleReserva();cr.show();}
+                    if(JOptionPane.showConfirmDialog(null, "Quer fazer uma reserva?", 
+                            "Reserva", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION){
+                        ControleReserva cr=new ControleReserva();cr.show();
+                    }
                 }else {//continua para livro 2
                     rs=stm.executeQuery("select quantidade from livro where id="+e.getLivro2());
                     rs.next();
                     quantidadeLivro2=rs.getInt("quantidade");
                     totalReservados=0;
                     id=0;
-                    rs=stm.executeQuery("select id,aluno,livro1,livro2 from reserva where (livro1="+e.getLivro2()+" or livro2="+e.getLivro2()+") and vencida=0 order by dataRealizacao");
+                    rs=stm.executeQuery("select id,aluno,livro1,livro2 from reserva where "
+                            + "(livro1="+e.getLivro2()+" or livro2="+e.getLivro2()+") and "
+                            + "vencida=0 order by dataRealizacao");
                     while(rs.next()){
                         if(rs.getInt("aluno")==e.getAluno()){//vê se é mesmo aluno da reserva
                             int idLivro1=rs.getInt("livro1");
@@ -83,20 +92,28 @@ public class EmprestimoManager {
                                 idLivro2=0;
                                 //stm.execute("update reserva set livro2=null where id="+id);
                             }
-                            if(idLivro1==0 && idLivro2==0){stm.execute("update reserva set vencida=1 where id="+id);}
+                            if(idLivro1==0 && idLivro2==0){stm.execute("update reserva set vencida=1 where"
+                                    + " id="+id);}
                             break;
                         }
                         totalReservados++;
                         if(totalReservados>=quantidadeLivro2){break;}
                     }
                     if(quantidadeLivro2==0 || quantidadeLivro2<=totalReservados){//ve se tem livro ou se tem mais reserva que livro
-                        JOptionPane.showMessageDialog(null, "Livro 2 indisponível\ntodos os exemplares já estão emprestados","Sem",JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Livro 2 indisponível\ntodos os exemplares já "
+                                + "estão emprestados","Sem",JOptionPane.ERROR_MESSAGE);
                         //abre reserva
-                    if(JOptionPane.showConfirmDialog(null, "Quer fazer uma reserva?", "Reserva", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION){ControleReserva cr=new ControleReserva();cr.show();}
+                    if(JOptionPane.showConfirmDialog(null, "Quer fazer uma reserva?", 
+                            "Reserva", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION){
+                        ControleReserva cr=new ControleReserva();cr.show();
+                    }
                     }else {
-                        stm.execute("insert into emprestimo(aluno,livro1,livro2,pendentes,dataRealizacao,dataDevolucao) "
-                                + "values("+e.getAluno()+","+e.getLivro1()+","+e.getLivro2()+","+AmbosLivrosPendente+",'"+e.getDatarealizacao()+"','"+e.getDataDevolucao()+"')");
-                        JOptionPane.showMessageDialog(null, "Cadastrado com sucesso","Sucesso",JOptionPane.PLAIN_MESSAGE);
+                        stm.execute("insert into emprestimo(aluno,livro1,livro2,pendentes,dataRealizacao,"
+                                + "dataDevolucao) "
+                                + "values("+e.getAluno()+","+e.getLivro1()+","+e.getLivro2()+","
+                                +AmbosLivrosPendente+",'"+e.getDatarealizacao()+"','"+e.getDataDevolucao()+"')");
+                        JOptionPane.showMessageDialog(null, "Cadastrado com sucesso",
+                                "Sucesso",JOptionPane.PLAIN_MESSAGE);
                         quantidadeLivro1-=1;quantidadeLivro2-=1;
                         stm.execute("update livro set quantidade="+quantidadeLivro1+" where id="+e.getLivro1());
                         stm.execute("update livro set quantidade="+quantidadeLivro2+" where id="+e.getLivro2());
@@ -113,7 +130,9 @@ public class EmprestimoManager {
                     int quantidadeUnico=rs.getInt("quantidade");
                     int totalReservados=0;
                     int id=0;
-                    rs=stm.executeQuery("select id,aluno,livro1,livro2 from reserva where (livro1="+e.getLivro1()+" or livro2="+e.getLivro1()+") and vencida=0 order by dataRealizacao");
+                    rs=stm.executeQuery("select id,aluno,livro1,livro2 from reserva where "
+                            + "(livro1="+e.getLivro1()+" or livro2="+e.getLivro1()+") and "
+                            + "vencida=0 order by dataRealizacao");
                     while(rs.next()){
                         if(rs.getInt("aluno")==e.getAluno()){
                             int idLivro1=rs.getInt("livro1");
@@ -127,7 +146,8 @@ public class EmprestimoManager {
                                 idLivro2=0;
                                 //stm.execute("update reserva set livro2=null where id="+id);
                             }
-                            if(idLivro1==0 && idLivro2==0){stm.execute("update reserva set vencida=1 where id="+id);}
+                            if(idLivro1==0 && idLivro2==0){stm.execute("update reserva set vencida=1 "
+                                    + "where id="+id);}
                             break;
                         }
                         totalReservados++;
@@ -135,13 +155,19 @@ public class EmprestimoManager {
                     }
                     
                     if(quantidadeUnico==0 || quantidadeUnico<=totalReservados){
-                        JOptionPane.showMessageDialog(null, "Livro 1 indisponível\ntodos os exemplares já estão emprestados","Sem",JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Livro 1 indisponível\ntodos os exemplares "
+                                + "já estão emprestados","Sem",JOptionPane.ERROR_MESSAGE);
                         //abre reserva
-                    if(JOptionPane.showConfirmDialog(null, "Quer fazer uma reserva?", "Reserva", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION){ControleReserva cr=new ControleReserva();cr.show();}
+                    if(JOptionPane.showConfirmDialog(null, "Quer fazer uma reserva?", 
+                            "Reserva", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION){
+                        ControleReserva cr=new ControleReserva();cr.show();
+                    }
                     }else {
                         stm.execute("insert into emprestimo(aluno,livro1,pendentes,dataRealizacao,dataDevolucao) "
-                                + "values("+e.getAluno()+","+e.getLivro1()+","+Livro1Pendente+",'"+e.getDatarealizacao()+"','"+e.getDataDevolucao()+"')");
-                        JOptionPane.showMessageDialog(null, "Cadastrado com sucesso","Sucesso",JOptionPane.PLAIN_MESSAGE);
+                                + "values("+e.getAluno()+","+e.getLivro1()+","
+                                +Livro1Pendente+",'"+e.getDatarealizacao()+"','"+e.getDataDevolucao()+"')");
+                        JOptionPane.showMessageDialog(null, "Cadastrado com sucesso",
+                                "Sucesso",JOptionPane.PLAIN_MESSAGE);
                         quantidadeUnico-=1;
                         stm.execute("update livro set quantidade="+quantidadeUnico+" where id="+e.getLivro1());
                     }

@@ -205,8 +205,12 @@ public class ControleAluno extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        TextSemestre.setText("00");
         TextSemestre.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        TextSemestre.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                TextSemestreFocusLost(evt);
+            }
+        });
 
         ComboPeriodo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         ComboPeriodo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Manha", "Tarde", "Noite" }));
@@ -380,7 +384,7 @@ public class ControleAluno extends javax.swing.JFrame {
        a.setEmail(TextEmail.getText());
        a.setTelefone(TextTelefone.getText().replace("-", "").replace("(", "").replace(")",""));
        a.setCurso(TextCurso.getText());
-       a.setSemestre(Integer.parseInt(TextSemestre.getText()));
+       a.setSemestre(Integer.parseInt(TextSemestre.getText().trim()));
        a.setPeriodo(ComboPeriodo.getSelectedIndex()+1);
        AlunoManager.cadastrar(a);
     }//GEN-LAST:event_ButGravarActionPerformed
@@ -420,7 +424,7 @@ public class ControleAluno extends javax.swing.JFrame {
                 TextEmail.setText("@fatec.sp.gov.br");
                 TextTelefone.setText("");
                 TextCurso.setText("");
-                TextSemestre.setText("00");
+                TextSemestre.setText("");
                 ButAlterar.setVisible(false);
                 ButExcluir.setVisible(false);
             }
@@ -439,7 +443,7 @@ public class ControleAluno extends javax.swing.JFrame {
                 a.setEmail(TextEmail.getText());
                 a.setTelefone(TextTelefone.getText().replace("-", "").replace("(", "").replace(")",""));
                 a.setCurso(TextCurso.getText());
-                a.setSemestre(Integer.parseInt(TextSemestre.getText()));
+                a.setSemestre(Integer.parseInt(TextSemestre.getText().trim()));
                 a.setPeriodo(ComboPeriodo.getSelectedIndex()+1);
                 AlunoManager.atualizar(a);
                 a=new Aluno();
@@ -449,12 +453,21 @@ public class ControleAluno extends javax.swing.JFrame {
                 TextEmail.setText("@fatec.sp.gov.br");
                 TextTelefone.setText("");
                 TextCurso.setText("");
-                TextSemestre.setText("00");
+                TextSemestre.setText("");
                 ButAlterar.setVisible(false);
                 ButExcluir.setVisible(false);
             }
         }
     }//GEN-LAST:event_ButAlterarActionPerformed
+
+    private void TextSemestreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TextSemestreFocusLost
+        if(TextSemestre.getText().substring(1).equals(" ")){
+            TextSemestre.setText("0"+TextSemestre.getText());
+        }
+        if(TextSemestre.getText().substring(0,1).equals(" ") && !TextSemestre.getText().substring(1).equals(" ")){
+            TextSemestre.setText(TextSemestre.getText()+"0");
+        }
+    }//GEN-LAST:event_TextSemestreFocusLost
 
     /**
      * @param args the command line arguments
